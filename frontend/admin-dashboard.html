@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin System Operations — SmartHire</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="/index.html" class="brand-logo">
+        <div class="logo-icon">⚡</div>
+        <div>Smart<span class="highlight">Hire</span></div>
+      </a>
+      <ul class="nav-links" id="nav-links-container"></ul>
+    </div>
+  </nav>
+
+  <main style="padding: 2.5rem 0 4rem; flex: 1;">
+    <div class="container">
+      
+      <!-- Welcome Header -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <div class="hero-badge">👑 Master Admin Portal</div>
+          <h1 style="font-size: 2rem; margin-bottom: 0.3rem;">Platform Operations & Governance</h1>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            System-wide monitoring, user management, and placement drive governance.
+          </p>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="openCreateRecruiterModal()">
+          🏢 Provision New Recruiter
+        </button>
+      </div>
+
+      <!-- Platform Statistics Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon indigo">🎓</div>
+          <div class="stat-content">
+            <div class="stat-number" id="adm-students">0</div>
+            <div class="stat-label">Total Students</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon cyan">🏢</div>
+          <div class="stat-content">
+            <div class="stat-number" id="adm-recruiters">0</div>
+            <div class="stat-label">Total Recruiters</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon indigo">💼</div>
+          <div class="stat-content">
+            <div class="stat-number" id="adm-jobs">0</div>
+            <div class="stat-label">Total Jobs</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon amber">📝</div>
+          <div class="stat-content">
+            <div class="stat-number" id="adm-applications">0</div>
+            <div class="stat-label">Total Applications</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon emerald">🎉</div>
+          <div class="stat-content">
+            <div class="stat-number" id="adm-selected">0</div>
+            <div class="stat-label">Selected Hires</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Tab Navigation -->
+      <div style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.75rem; overflow-x: auto;">
+        <button class="btn btn-secondary btn-sm active" id="tab-btn-students" onclick="switchAdminTab('students')">🎓 Students</button>
+        <button class="btn btn-secondary btn-sm" id="tab-btn-recruiters" onclick="switchAdminTab('recruiters')">🏢 Recruiters</button>
+        <button class="btn btn-secondary btn-sm" id="tab-btn-jobs" onclick="switchAdminTab('jobs')">💼 Placement Jobs</button>
+        <button class="btn btn-secondary btn-sm" id="tab-btn-apps" onclick="switchAdminTab('apps')">📋 All Applications</button>
+      </div>
+
+      <!-- Tab Content Area -->
+      <div class="card" id="admin-tab-content">
+        <div class="empty-state"><div class="spinner"></div><p style="margin-top:0.5rem;">Loading operations data...</p></div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Provision Recruiter Modal -->
+  <div class="modal-overlay" id="recruiter-modal">
+    <div class="modal-container" style="max-width: 580px;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.3rem;">Provision New Recruiter Account</h3>
+        <button class="modal-close" onclick="closeModal('recruiter-modal')">&times;</button>
+      </div>
+
+      <form id="create-recruiter-form">
+        <div class="form-group">
+          <label class="form-label" for="rec-name">Recruiter Name <span style="color: var(--accent-rose);">*</span></label>
+          <input type="text" id="rec-name" class="form-control" placeholder="e.g. Vikram Malhotra" required />
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="rec-email">Work Email <span style="color: var(--accent-rose);">*</span></label>
+            <input type="email" id="rec-email" class="form-control" placeholder="recruiter@company.com" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="rec-password">Password <span style="color: var(--accent-rose);">*</span></label>
+            <input type="password" id="rec-password" class="form-control" placeholder="Min 6 characters" required />
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="rec-company">Company Name <span style="color: var(--accent-rose);">*</span></label>
+            <input type="text" id="rec-company" class="form-control" placeholder="e.g. Google" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="rec-designation">Designation <span style="color: var(--accent-rose);">*</span></label>
+            <input type="text" id="rec-designation" class="form-control" placeholder="e.g. Lead Tech Recruiter" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="rec-phone">Phone Number <span style="color: var(--accent-rose);">*</span></label>
+          <input type="tel" id="rec-phone" class="form-control" placeholder="+91 9876543210" required />
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem;">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('recruiter-modal')">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm" id="create-rec-submit-btn">Create Recruiter</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/admin-dashboard.js"></script>
+</body>
+</html>

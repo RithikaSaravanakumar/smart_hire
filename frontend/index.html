@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartHire — Next-Gen Student Placement & Career Portal</title>
+  <meta name="description" content="Connect students with top placement opportunities using AI-driven skill matching and direct recruiter evaluation." />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="/index.html" class="brand-logo">
+        <div class="logo-icon">⚡</div>
+        <div>Smart<span class="highlight">Hire</span></div>
+      </a>
+      <ul class="nav-links" id="nav-links-container">
+        <!-- Injected via common.js -->
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="container">
+      <div class="hero-badge">
+        <span>✨ Powered by Intelligent Skill-Matching Engine</span>
+      </div>
+      <h1 class="hero-title">
+        Find the Right Opportunity.<br />
+        <span class="grad-text">Build Your Future.</span>
+      </h1>
+      <p class="hero-subtitle">
+        SmartHire connects students with suitable placement opportunities based on their verified skills, academic profile, and career interests.
+      </p>
+      <div class="hero-cta">
+        <a href="/register.html" class="btn btn-primary btn-lg">Register Now &rarr;</a>
+        <a href="/jobs.html" class="btn btn-secondary btn-lg">Explore Jobs</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Feature Highlights -->
+  <section style="padding: 2rem 0 3.5rem;">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        <div class="card">
+          <div class="stat-icon indigo" style="margin-bottom: 1rem;">🎯</div>
+          <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">AI Skill-Fit Scoring</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem;">
+            Instant percentage match and gap breakdown comparing your exact competencies with job prerequisites.
+          </p>
+        </div>
+        <div class="card">
+          <div class="stat-icon cyan" style="margin-bottom: 1rem;">🏢</div>
+          <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">Direct Recruiter Channels</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem;">
+            Verified campus recruiters review applications, schedule interviews, and update your status in real-time.
+          </p>
+        </div>
+        <div class="card">
+          <div class="stat-icon emerald" style="margin-bottom: 1rem;">⚡</div>
+          <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">One-Click Applications</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem;">
+            Apply seamlessly with your secure verified resume. Automated duplicate prevention keeps records clean.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Jobs Preview Section -->
+  <section style="padding: 2rem 0 4rem; background: rgba(0, 0, 0, 0.2);">
+    <div class="container">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem;">
+        <div>
+          <h2 style="font-size: 1.8rem; margin-bottom: 0.3rem;">Featured Placement Drives</h2>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">Explore top open positions from leading technology partners</p>
+        </div>
+        <a href="/jobs.html" class="btn btn-outline btn-sm">View All Jobs &rarr;</a>
+      </div>
+
+      <div id="preview-jobs-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+        <div class="empty-state" style="grid-column: 1 / -1;">
+          <div class="spinner"></div>
+          <p style="margin-top: 1rem;">Loading active opportunities...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section style="padding: 4.5rem 0; text-align: center;">
+    <div class="container">
+      <div class="card" style="background: var(--grad-surface); border-color: var(--border-glow); padding: 3.5rem 2rem;">
+        <h2 style="font-size: 2.2rem; margin-bottom: 1rem;">Ready to Accelerate Your Career?</h2>
+        <p style="color: var(--text-muted); max-width: 580px; margin: 0 auto 2rem; font-size: 1.05rem;">
+          Join thousands of students and top engineering colleges securing campus placements through SmartHire.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="/register.html" class="btn btn-primary btn-lg">Create Student Profile</a>
+          <a href="/login.html" class="btn btn-secondary btn-lg">Sign In to Dashboard</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="padding: 2rem 0; border-top: 1px solid var(--border-subtle); text-align: center; color: var(--text-dim); font-size: 0.88rem;">
+    <div class="container">
+      <p>&copy; 2026 SmartHire Placement Portal. Enterprise-grade Placement & Recruitment Platform.</p>
+    </div>
+  </footer>
+
+  <script src="/js/common.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const grid = document.getElementById('preview-jobs-grid');
+      try {
+        const res = await apiCall('/jobs?limit=4', { requiresAuth: false });
+        const jobs = res.data || [];
+        if (jobs.length === 0) {
+          grid.innerHTML = `<div class="empty-state" style="grid-column: 1 / -1;"><p>No active placement drives found.</p></div>`;
+          return;
+        }
+
+        grid.innerHTML = jobs.map(job => `
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+              <div>
+                <h3 style="font-size: 1.2rem; margin-bottom: 0.2rem;">${escapeHtml(job.job_title)}</h3>
+                <div style="color: var(--accent-cyan); font-weight: 600; font-size: 0.95rem;">${escapeHtml(job.company)}</div>
+              </div>
+              <span class="status-badge applied">💼 ${escapeHtml(job.experience)}</span>
+            </div>
+            
+            <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 0.75rem;">
+              📍 ${escapeHtml(job.location)}
+            </p>
+
+            ${job.skill_match ? renderMatchPill(job.skill_match) : ''}
+
+            <div class="skill-tags">
+              ${renderSkillBadges(job.skills)}
+            </div>
+
+            <div style="margin-top: 1.25rem; pt: 1rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.8rem; color: var(--text-dim);">Posted ${formatDate(job.created_at)}</span>
+              <a href="/jobs.html" class="btn btn-primary btn-sm">View & Apply</a>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        grid.innerHTML = `<div class="empty-state" style="grid-column: 1 / -1;"><p style="color: var(--accent-rose);">Could not load jobs preview.</p></div>`;
+      }
+    });
+  </script>
+</body>
+</html>

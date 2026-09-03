@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore Placement Opportunities — SmartHire</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="/index.html" class="brand-logo">
+        <div class="logo-icon">⚡</div>
+        <div>Smart<span class="highlight">Hire</span></div>
+      </a>
+      <ul class="nav-links" id="nav-links-container"></ul>
+    </div>
+  </nav>
+
+  <main style="padding: 2.5rem 0 4rem; flex: 1;">
+    <div class="container">
+      
+      <!-- Header -->
+      <div style="margin-bottom: 2rem;">
+        <h1 style="font-size: 2.2rem; margin-bottom: 0.4rem;">Explore Placement Drives</h1>
+        <p style="color: var(--text-muted); font-size: 1rem;">
+          Find job openings tailored to your specific skillset. Filter by experience, company, and location.
+        </p>
+      </div>
+
+      <!-- Search & Filters Toolbar -->
+      <div class="card" style="margin-bottom: 2rem; padding: 1.5rem;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+          
+          <!-- General Search Input -->
+          <div style="grid-column: 1 / -1;">
+            <label class="form-label" for="search-input">Search Opportunities</label>
+            <input 
+              type="text" 
+              id="search-input" 
+              class="form-control" 
+              placeholder="Search by job title, skill (e.g. Python, React), company, or city..." 
+            />
+          </div>
+
+          <!-- Location Filter -->
+          <div>
+            <label class="form-label" for="filter-location">Location</label>
+            <select id="filter-location" class="form-control">
+              <option value="">All Locations</option>
+              <option value="Bengaluru">Bengaluru</option>
+              <option value="Hyderabad">Hyderabad</option>
+              <option value="Pune">Pune</option>
+              <option value="Mumbai">Mumbai</option>
+              <option value="Chennai">Chennai</option>
+              <option value="Noida">Noida</option>
+              <option value="Gurugram">Gurugram</option>
+              <option value="Remote">Remote</option>
+            </select>
+          </div>
+
+          <!-- Experience Filter -->
+          <div>
+            <label class="form-label" for="filter-experience">Experience</label>
+            <select id="filter-experience" class="form-control">
+              <option value="">All Experience Levels</option>
+              <option value="Fresher">Fresher / Intern</option>
+              <option value="0-1">0-1 Year</option>
+              <option value="0-2">0-2 Years</option>
+              <option value="1-3">1-3 Years</option>
+            </select>
+          </div>
+
+          <!-- Skill Filter -->
+          <div>
+            <label class="form-label" for="filter-skill">Skill</label>
+            <select id="filter-skill" class="form-control">
+              <option value="">All Skills</option>
+              <option value="Python">Python</option>
+              <option value="Java">Java</option>
+              <option value="React">React</option>
+              <option value="SQL">SQL</option>
+              <option value="Flask">Flask</option>
+              <option value="Spring Boot">Spring Boot</option>
+              <option value="Docker">Docker</option>
+              <option value="Machine Learning">Machine Learning</option>
+            </select>
+          </div>
+
+          <!-- Company Filter -->
+          <div>
+            <label class="form-label" for="filter-company">Company</label>
+            <select id="filter-company" class="form-control">
+              <option value="">All Companies</option>
+              <option value="InnovateX Solutions">InnovateX Solutions</option>
+              <option value="CloudSphere Inc">CloudSphere Inc</option>
+              <option value="NeuralEdge AI Labs">NeuralEdge AI Labs</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; pt: 0.5rem;">
+          <span style="font-size: 0.88rem; color: var(--text-muted); font-weight: 500;" id="jobs-count-text">
+            Showing all opportunities...
+          </span>
+          <button class="btn btn-secondary btn-sm" id="reset-filters-btn">Reset Filters</button>
+        </div>
+      </div>
+
+      <!-- Jobs Grid -->
+      <div id="jobs-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem;">
+        <div class="empty-state" style="grid-column: 1 / -1;">
+          <div class="spinner"></div>
+          <p style="margin-top: 0.75rem;">Loading placement drives...</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Apply Confirmation Modal -->
+  <div class="modal-overlay" id="apply-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 style="font-size: 1.3rem;">Confirm Job Application</h3>
+        <button class="modal-close" onclick="closeModal('apply-modal')">&times;</button>
+      </div>
+
+      <div id="apply-modal-content" style="margin-bottom: 1.5rem;">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+        <button class="btn btn-secondary btn-sm" onclick="closeModal('apply-modal')">Cancel</button>
+        <button class="btn btn-primary btn-sm" id="confirm-apply-btn">
+          <span id="apply-btn-text">Confirm Application</span>
+          <span id="apply-btn-spinner" class="spinner" style="display: none; width: 16px; height: 16px;"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Job Details / Location Insights Modal -->
+  <div class="modal-overlay" id="job-details-modal">
+    <div class="modal-container" style="max-width: 620px;">
+      <div class="modal-header">
+        <h3 id="details-modal-title" style="font-size: 1.35rem;">Job Details</h3>
+        <button class="modal-close" onclick="closeModal('job-details-modal')">&times;</button>
+      </div>
+      <div id="details-modal-body"></div>
+    </div>
+  </div>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/jobs.js"></script>
+</body>
+</html>
