@@ -37,7 +37,7 @@
           
           <!-- Section 1: Account Information -->
           <div style="margin-bottom: 2rem;">
-            <h4 style="font-size: 1.05rem; margin-bottom: 1.1rem; color: var(--brand-cyan); border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">
+            <h4 style="font-size: 1.05rem; margin-bottom: 1.1rem; color: var(--brand-magenta); border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">
               1. Personal & Account Details
             </h4>
             <div class="form-row">
@@ -67,7 +67,7 @@
 
           <!-- Section 2: Academic Background -->
           <div style="margin-bottom: 2rem;">
-            <h4 style="font-size: 1.05rem; margin-bottom: 1.1rem; color: var(--brand-cyan); border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">
+            <h4 style="font-size: 1.05rem; margin-bottom: 1.1rem; color: var(--brand-magenta); border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">
               2. Academic Credentials
             </h4>
             <div class="form-group">
@@ -106,7 +106,7 @@
 
           <!-- Section 3: Technical Competencies & Resume -->
           <div style="margin-bottom: 2.25rem;">
-            <h4 style="font-size: 1.05rem; margin-bottom: 1.1rem; color: var(--brand-cyan); border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">
+            <h4 style="font-size: 1.05rem; margin-bottom: 1.1rem; color: var(--brand-magenta); border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">
               3. Skills & Resume Upload
             </h4>
             <div class="form-group">
@@ -154,7 +154,7 @@
       const display = document.getElementById('resume-filename-display');
       if (input.files && input.files[0]) {
         const file = input.files[0];
-        display.innerHTML = `Selected File: <strong style="color: var(--brand-cyan);">${escapeHtml(file.name)}</strong> (${(file.size / (1024 * 1024)).toFixed(2)} MB)`;
+        display.innerHTML = `Selected File: <strong style="color: var(--brand-magenta);">${escapeHtml(file.name)}</strong> (${(file.size / (1024 * 1024)).toFixed(2)} MB)`;
       } else {
         display.textContent = 'Click or drag and drop your resume file here';
       }

@@ -1,65 +1,68 @@
 /* ==========================================================================
-   SmartHire — Enterprise SaaS Design System & UI Architecture
-   Engineered for high performance, accessibility, and modern aesthetics.
+   SmartHire — Enterprise Violet SaaS Design System & UI Architecture
+   Palette: Rich Violet, Lavender, Orchid, and Deep Obsidian Violet
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
 
 :root {
-  /* --- 60-30-10 Color Architecture --- */
-  /* Neutral / Background (60%) */
-  --bg-app: #090d16;
-  --bg-canvas: #0d1322;
-  --bg-surface: #131b2e;
-  --bg-surface-elevated: #1a243b;
-  --bg-surface-hover: #222f4c;
-  --bg-glass: rgba(19, 27, 46, 0.75);
+  /* --- 60-30-10 Violet Color Architecture --- */
+  /* Neutral / Background (60% - Deep Obsidian Violet) */
+  --bg-app: #0b0813;
+  --bg-canvas: #100c1c;
+  --bg-surface: #171126;
+  --bg-surface-elevated: #201735;
+  --bg-surface-hover: #2b1f47;
+  --bg-glass: rgba(23, 17, 38, 0.78);
   
   /* Borders & Dividers */
-  --border-subtle: rgba(255, 255, 255, 0.07);
-  --border-default: rgba(255, 255, 255, 0.12);
-  --border-focus: #6366f1;
-  --border-glow: rgba(99, 102, 241, 0.35);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-default: rgba(255, 255, 255, 0.14);
+  --border-focus: #8b5cf6;
+  --border-glow: rgba(139, 92, 246, 0.4);
 
   /* Typography / Text Colors */
   --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --text-inverse: #090d16;
+  --text-secondary: #9d9db5;
+  --text-muted: #6f6b85;
+  --text-inverse: #0b0813;
 
-  /* Brand Primary & Accent (10%) */
-  --brand-primary: #6366f1;
-  --brand-primary-hover: #4f46e5;
-  --brand-primary-light: rgba(99, 102, 241, 0.12);
-  --brand-cyan: #06b6d4;
-  --brand-cyan-light: rgba(6, 182, 212, 0.12);
+  /* Brand Primary & Violet Shades (10%) */
+  --brand-primary: #8b5cf6;            /* Electric Violet */
+  --brand-primary-hover: #7c3aed;      /* Deep Royal Violet */
+  --brand-primary-light: rgba(139, 92, 246, 0.15); /* Translucent Violet */
+  --brand-accent: #a78bfa;             /* Bright Lavender */
+  --brand-accent-light: rgba(167, 139, 250, 0.15);
+  --brand-magenta: #c084fc;            /* Soft Orchid / Lilac */
+  --brand-magenta-light: rgba(192, 132, 252, 0.15);
+  --brand-dark: #5b21b6;               /* Midnight Violet */
 
   /* Semantic Status Palette */
   --status-success: #10b981;
-  --status-success-bg: rgba(16, 185, 129, 0.12);
-  --status-success-border: rgba(16, 185, 129, 0.3);
+  --status-success-bg: rgba(16, 185, 129, 0.14);
+  --status-success-border: rgba(16, 185, 129, 0.35);
 
   --status-warning: #f59e0b;
-  --status-warning-bg: rgba(245, 158, 11, 0.12);
-  --status-warning-border: rgba(245, 158, 11, 0.3);
+  --status-warning-bg: rgba(245, 158, 11, 0.14);
+  --status-warning-border: rgba(245, 158, 11, 0.35);
 
   --status-danger: #f43f5e;
-  --status-danger-bg: rgba(244, 63, 94, 0.12);
-  --status-danger-border: rgba(244, 63, 94, 0.3);
+  --status-danger-bg: rgba(244, 63, 94, 0.14);
+  --status-danger-border: rgba(244, 63, 94, 0.35);
 
-  --status-info: #38bdf8;
-  --status-info-bg: rgba(56, 189, 248, 0.12);
-  --status-info-border: rgba(56, 189, 248, 0.3);
+  --status-info: #a78bfa;
+  --status-info-bg: rgba(167, 139, 250, 0.14);
+  --status-info-border: rgba(167, 139, 250, 0.35);
 
-  --status-purple: #a855f7;
-  --status-purple-bg: rgba(168, 85, 247, 0.12);
-  --status-purple-border: rgba(168, 85, 247, 0.3);
+  --status-purple: #c084fc;
+  --status-purple-bg: rgba(192, 132, 252, 0.14);
+  --status-purple-border: rgba(192, 132, 252, 0.35);
 
   /* Gradients */
-  --grad-brand: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
-  --grad-surface: linear-gradient(180deg, rgba(26, 36, 59, 0.6) 0%, rgba(19, 27, 46, 0.8) 100%);
-  --grad-mesh: radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
-               radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.05) 0px, transparent 50%);
+  --grad-brand: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%);
+  --grad-surface: linear-gradient(180deg, rgba(32, 23, 53, 0.6) 0%, rgba(23, 17, 38, 0.85) 100%);
+  --grad-mesh: radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.12) 0px, transparent 50%),
+               radial-gradient(at 100% 100%, rgba(192, 132, 252, 0.08) 0px, transparent 50%);
 
   /* Typography Scale */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -78,7 +81,7 @@
   --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.35);
   --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.45);
   --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.55);
-  --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.25);
+  --shadow-glow: 0 0 28px rgba(139, 92, 246, 0.3);
 
   /* Transitions */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -137,13 +140,13 @@ p {
 }
 
 a {
-  color: var(--brand-cyan);
+  color: var(--brand-accent);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
 a:hover {
-  color: var(--brand-primary);
+  color: var(--brand-magenta);
 }
 
 strong {
@@ -177,7 +180,7 @@ strong {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(9, 13, 22, 0.85);
+  background: rgba(11, 8, 19, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-subtle);
@@ -214,7 +217,7 @@ strong {
   color: #ffffff;
   font-size: 1.1rem;
   font-weight: 800;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.45);
 }
 
 .brand-logo span.highlight {
@@ -249,14 +252,14 @@ strong {
 
 .nav-link.active {
   color: #ffffff;
-  background: rgba(99, 102, 241, 0.18);
-  border: 1px solid rgba(99, 102, 241, 0.3);
+  background: rgba(139, 92, 246, 0.22);
+  border: 1px solid rgba(139, 92, 246, 0.35);
   font-weight: 600;
 }
 
 .nav-user-badge {
   background: var(--brand-primary-light);
-  border: 1px solid rgba(99, 102, 241, 0.3);
+  border: 1px solid rgba(139, 92, 246, 0.35);
   padding: 0.35rem 0.85rem;
   border-radius: var(--radius-pill);
   font-size: 0.825rem;
@@ -268,7 +271,7 @@ strong {
 }
 
 .nav-user-badge span {
-  color: var(--brand-cyan);
+  color: var(--brand-magenta);
   font-size: 0.75rem;
 }
 
@@ -311,11 +314,11 @@ strong {
 .btn-primary {
   background: var(--grad-brand);
   color: #ffffff;
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.55);
   transform: translateY(-1px);
   color: #ffffff;
 }
@@ -332,18 +335,18 @@ strong {
 
 .btn-secondary:hover {
   background: var(--bg-surface-hover);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(167, 139, 250, 0.3);
   color: #ffffff;
 }
 
 .btn-outline {
   background: transparent;
-  color: var(--brand-cyan);
-  border-color: var(--brand-cyan);
+  color: var(--brand-accent);
+  border-color: var(--brand-accent);
 }
 
 .btn-outline:hover {
-  background: var(--brand-cyan-light);
+  background: var(--brand-accent-light);
   color: #ffffff;
 }
 
@@ -402,8 +405,8 @@ strong {
 
 .card-interactive:hover {
   transform: translateY(-2px);
-  border-color: rgba(99, 102, 241, 0.4);
-  box-shadow: var(--shadow-md), 0 0 20px rgba(99, 102, 241, 0.1);
+  border-color: rgba(139, 92, 246, 0.45);
+  box-shadow: var(--shadow-md), 0 0 22px rgba(139, 92, 246, 0.15);
 }
 
 .card-header {
@@ -438,12 +441,12 @@ strong {
   align-items: center;
   gap: 0.5rem;
   background: var(--brand-primary-light);
-  border: 1px solid rgba(99, 102, 241, 0.3);
+  border: 1px solid rgba(139, 92, 246, 0.35);
   padding: 0.4rem 1.1rem;
   border-radius: var(--radius-pill);
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--brand-cyan);
+  color: var(--brand-magenta);
   margin-bottom: 1.5rem;
   letter-spacing: 0.02em;
 }
@@ -499,7 +502,7 @@ strong {
   font-family: var(--font-display);
   font-size: 2.1rem;
   font-weight: 800;
-  color: var(--brand-cyan);
+  color: var(--brand-magenta);
   line-height: 1;
   margin-bottom: 0.35rem;
 }
@@ -528,7 +531,7 @@ strong {
 
 .feature-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(99, 102, 241, 0.4);
+  border-color: rgba(139, 92, 246, 0.45);
 }
 
 .feature-icon {
@@ -536,7 +539,7 @@ strong {
   height: 48px;
   border-radius: var(--radius-md);
   background: var(--brand-primary-light);
-  color: var(--brand-primary);
+  color: var(--brand-accent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -580,7 +583,7 @@ strong {
 .form-control:focus {
   outline: none;
   border-color: var(--brand-primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.28);
   background: var(--bg-surface-hover);
 }
 
@@ -654,7 +657,7 @@ strong {
 
 .file-upload-zone .upload-icon {
   font-size: 2rem;
-  color: var(--brand-cyan);
+  color: var(--brand-magenta);
   margin-bottom: 0.5rem;
 }
 
@@ -698,15 +701,15 @@ strong {
 }
 
 .status-badge.shortlisted {
-  background: rgba(99, 102, 241, 0.15);
-  border: 1px solid rgba(99, 102, 241, 0.35);
-  color: #818cf8;
+  background: var(--brand-primary-light);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  color: var(--brand-accent);
 }
 
 .status-badge.interview {
-  background: var(--status-purple-bg);
-  border: 1px solid var(--status-purple-border);
-  color: var(--status-purple);
+  background: var(--brand-magenta-light);
+  border: 1px solid rgba(192, 132, 252, 0.4);
+  color: var(--brand-magenta);
 }
 
 .status-badge.selected {
@@ -739,9 +742,9 @@ strong {
 }
 
 .match-pill.medium {
-  background: rgba(99, 102, 241, 0.15);
-  border: 1px solid rgba(99, 102, 241, 0.35);
-  color: #818cf8;
+  background: var(--brand-primary-light);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  color: var(--brand-accent);
 }
 
 .match-pill.potential {
@@ -806,7 +809,7 @@ strong {
 
 .kpi-card:hover {
   transform: translateY(-2px);
-  border-color: var(--border-default);
+  border-color: rgba(139, 92, 246, 0.4);
 }
 
 .kpi-icon {
@@ -821,10 +824,10 @@ strong {
 }
 
 .kpi-icon.indigo { background: var(--brand-primary-light); color: var(--brand-primary); }
-.kpi-icon.cyan   { background: var(--brand-cyan-light); color: var(--brand-cyan); }
+.kpi-icon.cyan   { background: var(--brand-magenta-light); color: var(--brand-magenta); }
 .kpi-icon.amber  { background: var(--status-warning-bg); color: var(--status-warning); }
 .kpi-icon.emerald{ background: var(--status-success-bg); color: var(--status-success); }
-.kpi-icon.purple { background: var(--status-purple-bg); color: var(--status-purple); }
+.kpi-icon.purple { background: var(--brand-accent-light); color: var(--brand-accent); }
 
 .kpi-details .kpi-value {
   font-family: var(--font-display);
@@ -895,7 +898,7 @@ strong {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(9, 13, 22, 0.75);
+  background: rgba(11, 8, 19, 0.78);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 2000;
@@ -1007,7 +1010,7 @@ strong {
 .toast.success { border-left: 4px solid var(--status-success); }
 .toast.error   { border-left: 4px solid var(--status-danger); }
 .toast.warning { border-left: 4px solid var(--status-warning); }
-.toast.info    { border-left: 4px solid var(--brand-cyan); }
+.toast.info    { border-left: 4px solid var(--brand-accent); }
 
 @keyframes toastSlideIn {
   from { opacity: 0; transform: translateY(15px); }
@@ -1018,7 +1021,7 @@ strong {
    Skeleton Loaders & Empty States
    ========================================================================== */
 .skeleton {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0.04) 75%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 25%, rgba(139, 92, 246, 0.12) 50%, rgba(255, 255, 255, 0.04) 75%);
   background-size: 200% 100%;
   animation: skeletonShimmer 1.5s infinite;
   border-radius: var(--radius-sm);
@@ -1042,7 +1045,7 @@ strong {
 
 .empty-state-icon {
   font-size: 3rem;
-  color: var(--text-muted);
+  color: var(--brand-accent);
   margin-bottom: 1rem;
   opacity: 0.7;
 }

@@ -37,8 +37,8 @@ async function loadProfile() {
     if (profile.resume) {
       resumeInfo.innerHTML = `
         <span style="color: #34d399;">✓ Current resume uploaded:</span> 
-        <a href="/uploads/${escapeHtml(profile.resume)}" target="_blank" style="color: var(--accent-cyan); font-weight: 600; text-decoration: underline;">
-          View / Download Resume
+        <a href="/uploads/${escapeHtml(profile.resume)}" target="_blank" style="color: var(--brand-accent); font-weight: 600; text-decoration: underline;">
+          View / Download Resume ↗
         </a>
       `;
     } else {

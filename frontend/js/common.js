@@ -1,5 +1,5 @@
 /**
- * SmartHire — Enterprise SaaS Client Core Module
+ * SmartHire — Enterprise Violet SaaS Client Core Module
  * Manages API communication, JWT authentication, UI Modals, Status Badges, Toast Alerts & Skeletons
  */
 
@@ -165,7 +165,7 @@ function updateNavbar() {
       <li><a href="/recruiter-dashboard.html" class="nav-link ${currentPath.includes('recruiter') ? 'active' : ''}">Dashboard</a></li>
       <li><a href="javascript:void(0)" onclick="openCreateJobModal()" class="btn btn-primary btn-sm">+ Post Job</a></li>
       <li>
-        <span class="nav-user-badge" style="background: rgba(6, 182, 212, 0.15); border-color: rgba(6, 182, 212, 0.3); color: var(--brand-cyan);">
+        <span class="nav-user-badge" style="background: rgba(192, 132, 252, 0.15); border-color: rgba(192, 132, 252, 0.35); color: var(--brand-magenta);">
           <span>🏢</span> ${escapeHtml(user.email.split('@')[0])}
         </span>
       </li>
@@ -175,7 +175,7 @@ function updateNavbar() {
     // Admin Navigation
     links = `
       <li><a href="/admin-dashboard.html" class="nav-link ${currentPath.includes('admin') ? 'active' : ''}">Dashboard</a></li>
-      <li><a href="/api/docs" target="_blank" class="nav-link" style="color: var(--status-purple);">API Docs ↗</a></li>
+      <li><a href="/api/docs" target="_blank" class="nav-link" style="color: var(--brand-accent);">API Docs ↗</a></li>
       <li>
         <span class="nav-user-badge" style="background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.3); color: var(--status-warning);">
           <span>👑</span> Admin Control

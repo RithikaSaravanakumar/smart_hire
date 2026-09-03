@@ -132,7 +132,7 @@ async function loadRecommendations() {
             <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem; gap: 0.5rem;">
               <div>
                 <h3 style="font-size: 1.15rem; margin-bottom: 0.2rem;">${escapeHtml(job.job_title)}</h3>
-                <div style="color: var(--brand-cyan); font-weight: 600; font-size: 0.9rem;">${escapeHtml(job.company)}</div>
+                <div style="color: var(--brand-magenta); font-weight: 600; font-size: 0.9rem;">${escapeHtml(job.company)}</div>
               </div>
               <span class="badge" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-default); color: var(--text-secondary);">
                 📍 ${escapeHtml(job.location.split(',')[0])}
@@ -191,7 +191,7 @@ function renderApplicationsTable(applications) {
       <tr>
         <td>
           <div style="font-weight: 600; color: var(--text-primary);">${escapeHtml(job.job_title || 'Position')}</div>
-          <div style="font-size: 0.85rem; color: var(--brand-cyan);">${escapeHtml(job.company || 'Company')}</div>
+          <div style="font-size: 0.85rem; color: var(--brand-magenta);">${escapeHtml(job.company || 'Company')}</div>
         </td>
         <td style="color: var(--text-secondary); font-size: 0.875rem;">
           📍 ${escapeHtml(job.location || 'N/A')}

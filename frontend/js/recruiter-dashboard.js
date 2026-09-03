@@ -78,7 +78,7 @@ function renderRecruiterJobs(jobs) {
     <tr>
       <td>
         <div style="font-weight: 600; color: var(--text-primary); font-size: 0.95rem;">${escapeHtml(job.job_title)}</div>
-        <div style="font-size: 0.825rem; color: var(--brand-cyan);">${escapeHtml(job.company)}</div>
+        <div style="font-size: 0.825rem; color: var(--brand-magenta);">${escapeHtml(job.company)}</div>
       </td>
       <td><span style="font-size: 0.875rem; color: var(--text-secondary);">📍 ${escapeHtml(job.location)}</span></td>
       <td><span class="badge" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-default);">${escapeHtml(job.experience)}</span></td>

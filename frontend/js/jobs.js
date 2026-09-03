@@ -60,7 +60,7 @@ function renderJobsList(jobs) {
           <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; gap: 0.5rem;">
             <div>
               <h3 style="font-size: 1.2rem; margin-bottom: 0.2rem;">${escapeHtml(job.job_title)}</h3>
-              <div style="color: var(--brand-cyan); font-weight: 600; font-size: 0.925rem;">${escapeHtml(job.company)}</div>
+              <div style="color: var(--brand-magenta); font-weight: 600; font-size: 0.925rem;">${escapeHtml(job.company)}</div>
             </div>
             <span class="badge" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-default); color: var(--text-secondary); white-space: nowrap;">
               💼 ${escapeHtml(job.experience)}
@@ -136,7 +136,7 @@ function promptApplyJob(jobId) {
   const studentSummary = document.getElementById('apply-student-summary');
 
   if (confirmText) {
-    confirmText.innerHTML = `You are applying for <strong style="color: var(--text-primary);">${escapeHtml(job.job_title)}</strong> at <strong style="color: var(--brand-cyan);">${escapeHtml(job.company)}</strong>.`;
+    confirmText.innerHTML = `You are applying for <strong style="color: var(--text-primary);">${escapeHtml(job.job_title)}</strong> at <strong style="color: var(--brand-magenta);">${escapeHtml(job.company)}</strong>.`;
   }
   if (studentSummary) {
     studentSummary.textContent = user.profile ? `${user.profile.name || user.email} (${user.profile.college || 'Enrolled Student'})` : user.email;
@@ -197,7 +197,7 @@ async function viewJobInsights(jobId) {
 
     modalBody.innerHTML = `
       <div style="margin-bottom: 1.25rem;">
-        <div style="font-size: 1.15rem; color: var(--brand-cyan); font-weight: 700; margin-bottom: 0.25rem;">
+        <div style="font-size: 1.15rem; color: var(--brand-magenta); font-weight: 700; margin-bottom: 0.25rem;">
           ${escapeHtml(job.company)}
         </div>
         <div style="color: var(--text-muted); font-size: 0.9rem;">
@@ -208,8 +208,8 @@ async function viewJobInsights(jobId) {
       ${match ? `<div style="margin-bottom: 1.25rem;">${renderMatchPill(match)}</div>` : ''}
 
       <!-- Open-Meteo Location Intelligence Box -->
-      <div class="card" style="background: var(--bg-surface-elevated); padding: 1.25rem; margin-bottom: 1.5rem; border-color: rgba(6, 182, 212, 0.3);">
-        <div style="font-size: 0.8rem; font-weight: 700; color: var(--brand-cyan); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem;">
+      <div class="card" style="background: var(--bg-surface-elevated); padding: 1.25rem; margin-bottom: 1.5rem; border-color: rgba(192, 132, 252, 0.35);">
+        <div style="font-size: 0.8rem; font-weight: 700; color: var(--brand-magenta); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem;">
           <span>🌐</span> Location Intelligence & Regional Insights
         </div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.85rem;">

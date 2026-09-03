@@ -145,7 +145,7 @@ async function loadRecruitersTab() {
                 <tr>
                   <td><strong style="color: var(--text-primary);">${escapeHtml(r.name)}</strong></td>
                   <td>
-                    <div style="color: var(--brand-cyan); font-weight: 600;">${escapeHtml(r.company)}</div>
+                    <div style="color: var(--brand-magenta); font-weight: 600;">${escapeHtml(r.company)}</div>
                     <div style="font-size: 0.825rem; color: var(--text-muted);">${escapeHtml(r.designation || 'Talent Lead')}</div>
                   </td>
                   <td style="font-size: 0.85rem; color: var(--text-secondary);">${escapeHtml(r.email)}</td>
@@ -191,7 +191,7 @@ async function loadJobsTab() {
               jobs.map(j => `
                 <tr>
                   <td><strong style="color: var(--text-primary);">${escapeHtml(j.job_title)}</strong></td>
-                  <td style="color: var(--brand-cyan); font-weight: 600;">${escapeHtml(j.company)}</td>
+                  <td style="color: var(--brand-magenta); font-weight: 600;">${escapeHtml(j.company)}</td>
                   <td style="font-size: 0.85rem; color: var(--text-secondary);">📍 ${escapeHtml(j.location)}</td>
                   <td style="max-width: 220px;">${renderSkillBadges(j.skills)}</td>
                   <td style="text-align: right;">
@@ -240,7 +240,7 @@ async function loadApplicationsTab() {
                   </td>
                   <td>
                     <div style="font-weight: 600;">${escapeHtml(a.job_title || 'Position')}</div>
-                    <div style="font-size: 0.825rem; color: var(--brand-cyan);">${escapeHtml(a.company || '')}</div>
+                    <div style="font-size: 0.825rem; color: var(--brand-magenta);">${escapeHtml(a.company || '')}</div>
                   </td>
                   <td style="font-size: 0.85rem; color: var(--text-muted);">${formatDate(a.application_date)}</td>
                   <td>${renderStatusBadge(a.status)}</td>
