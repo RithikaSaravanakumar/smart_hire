@@ -252,6 +252,23 @@ def create_app(config_class=Config):
             }
         }), status_code
 
+    # Safe Idempotent Database Seeding Endpoint
+    @app.route('/api/seed', methods=['POST', 'GET'])
+    def trigger_seed():
+        try:
+            from database.seed_data import seed_database
+            seed_database(drop_existing=False)
+            return jsonify({
+                'success': True,
+                'message': 'Database seeded successfully with initial accounts and placement jobs'
+            }), 200
+        except Exception as e:
+            app.logger.error(f"Error seeding database: {e}")
+            return jsonify({
+                'success': False,
+                'message': f"Seeding failed: {str(e)}"
+            }), 500
+
     # Swagger / OpenAPI Documentation Routes
     @app.route('/api/swagger.json', methods=['GET'])
     def swagger_json():
