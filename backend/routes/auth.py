@@ -14,6 +14,22 @@ from backend.utils.validation import (
 
 auth_bp = Blueprint('auth', __name__)
 
+@auth_bp.route('/seed', methods=['GET', 'POST'])
+def trigger_seed_auth():
+    """Seed initial demo accounts and placement jobs."""
+    try:
+        from database.seed_data import seed_database
+        seed_database(drop_existing=False)
+        return jsonify({
+            'success': True,
+            'message': 'Database seeded successfully with initial accounts and placement jobs'
+        }), 200
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f"Seeding failed: {str(e)}"
+        }), 500
+
 @auth_bp.route('/register', methods=['POST'])
 def register_student():
     """
