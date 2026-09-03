@@ -4,86 +4,83 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Recruiter Management Hub — SmartHire</title>
+  <meta name="description" content="Manage corporate placement drives, review candidate applications, and update recruitment pipeline stages." />
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
 
   <!-- Navigation Bar -->
-  <nav class="navbar">
+  <nav class="navbar" aria-label="Main Navigation">
     <div class="container nav-inner">
-      <a href="/index.html" class="brand-logo">
-        <div class="logo-icon">⚡</div>
+      <a href="/index.html" class="brand-logo" aria-label="SmartHire Home">
+        <div class="logo-icon" aria-hidden="true">⚡</div>
         <div>Smart<span class="highlight">Hire</span></div>
       </a>
       <ul class="nav-links" id="nav-links-container"></ul>
     </div>
   </nav>
 
-  <main style="padding: 2.5rem 0 4rem; flex: 1;">
+  <main class="page-wrapper">
     <div class="container">
       
-      <!-- Welcome Header -->
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+      <!-- Top Bar -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.25rem; flex-wrap: wrap; gap: 1rem;">
         <div>
-          <h1 style="font-size: 2rem; margin-bottom: 0.3rem;" id="recruiter-title">Recruiter Workspace</h1>
-          <p style="color: var(--text-muted); font-size: 0.95rem;" id="recruiter-subtitle">
-            Manage your placement drives and evaluate candidate applications.
+          <div class="hero-badge" style="margin-bottom: 0.5rem;">🏢 Recruiter Workspace</div>
+          <h1 style="font-size: 2.1rem; margin-bottom: 0.35rem;" id="recruiter-title">Recruiter Management Hub</h1>
+          <p style="color: var(--text-secondary); font-size: 0.95rem;" id="recruiter-subtitle">
+            Manage your company placement drives, review candidate resumes, and update application stages.
           </p>
         </div>
         <button class="btn btn-primary btn-sm" onclick="openCreateJobModal()">
-          ➕ Post New Job
+          ➕ Post Placement Drive
         </button>
       </div>
 
-      <!-- Recruiter Stats Grid -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-icon indigo">💼</div>
-          <div class="stat-content">
-            <div class="stat-number" id="rec-total-jobs">0</div>
-            <div class="stat-label">My Job Postings</div>
+      <!-- Recruiter KPI Stats Grid -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon indigo">💼</div>
+          <div class="kpi-details">
+            <div class="kpi-value" id="rec-total-jobs">-</div>
+            <div class="kpi-title">My Posted Drives</div>
           </div>
         </div>
 
-        <div class="stat-card">
-          <div class="stat-icon cyan">👥</div>
-          <div class="stat-content">
-            <div class="stat-number" id="rec-total-apps">0</div>
-            <div class="stat-label">Total Applicants</div>
+        <div class="kpi-card">
+          <div class="kpi-icon cyan">👥</div>
+          <div class="kpi-details">
+            <div class="kpi-value" id="rec-total-apps">-</div>
+            <div class="kpi-title">Total Applicants</div>
           </div>
         </div>
 
-        <div class="stat-card">
-          <div class="stat-icon amber">⏳</div>
-          <div class="stat-content">
-            <div class="stat-number" id="rec-under-review">0</div>
-            <div class="stat-label">Under Review</div>
+        <div class="kpi-card">
+          <div class="kpi-icon amber">⏳</div>
+          <div class="kpi-details">
+            <div class="kpi-value" id="rec-under-review">-</div>
+            <div class="kpi-title">Under Review</div>
           </div>
         </div>
 
-        <div class="stat-card">
-          <div class="stat-icon indigo">⭐</div>
-          <div class="stat-content">
-            <div class="stat-number" id="rec-shortlisted">0</div>
-            <div class="stat-label">Shortlisted</div>
-          </div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-icon emerald">🎉</div>
-          <div class="stat-content">
-            <div class="stat-number" id="rec-selected">0</div>
-            <div class="stat-label">Selected Hires</div>
+        <div class="kpi-card">
+          <div class="kpi-icon emerald">🎉</div>
+          <div class="kpi-details">
+            <div class="kpi-value" id="rec-selected">-</div>
+            <div class="kpi-title">Selected Hires</div>
           </div>
         </div>
       </div>
 
-      <!-- Jobs Management Table -->
-      <div class="card">
-        <h2 style="font-size: 1.35rem; margin-bottom: 1.25rem;">My Active Placement Drives</h2>
-        
-        <div class="table-responsive">
-          <table class="table-custom">
+      <!-- Active Placement Drives Table -->
+      <div style="margin-bottom: 3rem;">
+        <div style="margin-bottom: 1.25rem;">
+          <h2 style="font-size: 1.35rem; margin-bottom: 0.2rem;">My Active Placement Drives</h2>
+          <p style="color: var(--text-secondary); font-size: 0.875rem;">Jobs authored under your recruiter profile</p>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="data-table">
             <thead>
               <tr>
                 <th>Job Title</th>
@@ -91,15 +88,44 @@
                 <th>Experience</th>
                 <th>Applicants</th>
                 <th>Created Date</th>
-                <th>Actions</th>
+                <th style="text-align: right;">Actions</th>
               </tr>
             </thead>
             <tbody id="recruiter-jobs-body">
               <tr>
-                <td colspan="6" style="text-align: center; padding: 2rem;">
-                  <div class="spinner"></div>
+                <td colspan="6" style="text-align: center; padding: 2.5rem;">
+                  <div class="skeleton" style="height: 30px; width: 60%; margin: 0 auto;"></div>
                 </td>
               </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Applicants Evaluation Table (Rendered when viewing a job) -->
+      <div id="applicants-section" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            <h2 style="font-size: 1.35rem; margin-bottom: 0.2rem;" id="applicants-section-title">Candidate Applicants</h2>
+            <p style="color: var(--text-secondary); font-size: 0.875rem;">Review candidate credentials and advance hiring stages</p>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="closeApplicantsSection()">✕ Close Viewer</button>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Candidate Name & College</th>
+                <th>Academic Stats</th>
+                <th>Technical Skills</th>
+                <th>Resume</th>
+                <th>Current Status</th>
+                <th style="text-align: right;">Update Stage</th>
+              </tr>
+            </thead>
+            <tbody id="applicants-table-body">
+              <!-- Injected dynamically -->
             </tbody>
           </table>
         </div>
@@ -109,72 +135,46 @@
   </main>
 
   <!-- Create / Edit Job Modal -->
-  <div class="modal-overlay" id="job-modal">
-    <div class="modal-container" style="max-width: 600px;">
+  <div id="job-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="job-modal-title">
+    <div class="modal-card">
       <div class="modal-header">
-        <h3 id="job-modal-heading" style="font-size: 1.3rem;">Post New Job Listing</h3>
-        <button class="modal-close" onclick="closeModal('job-modal')">&times;</button>
+        <h3 id="job-modal-title">Post New Placement Drive</h3>
+        <button class="modal-close" onclick="closeModal('job-modal')" aria-label="Close dialog">&times;</button>
       </div>
-
-      <form id="job-form">
-        <input type="hidden" id="modal-job-id" value="" />
-        
-        <div class="form-group">
-          <label class="form-label" for="job-title-input">Job Title <span style="color: var(--accent-rose);">*</span></label>
-          <input type="text" id="job-title-input" class="form-control" placeholder="e.g. Senior Backend Engineer" required />
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+      <div class="modal-body">
+        <form id="job-form" novalidate>
+          <input type="hidden" id="edit-job-id" value="" />
+          
           <div class="form-group">
-            <label class="form-label" for="job-location-input">Location <span style="color: var(--accent-rose);">*</span></label>
-            <input type="text" id="job-location-input" class="form-control" placeholder="e.g. Bengaluru, Karnataka" required />
+            <label class="form-label" for="job-title">Job Position Title <span class="required">*</span></label>
+            <input type="text" id="job-title" class="form-control" placeholder="e.g. Cloud DevOps Engineer" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="job-location">Location / City <span class="required">*</span></label>
+              <input type="text" id="job-location" class="form-control" placeholder="e.g. Bengaluru, Karnataka (or Remote)" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="job-experience">Experience Requirement <span class="required">*</span></label>
+              <input type="text" id="job-experience" class="form-control" placeholder="e.g. 0-2 Years (Freshers Welcome)" required />
+            </div>
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="job-exp-input">Experience Level <span style="color: var(--accent-rose);">*</span></label>
-            <input type="text" id="job-exp-input" class="form-control" placeholder="e.g. 0-2 Years" required />
+            <label class="form-label" for="job-skills">Required Technical Skills (Comma-separated) <span class="required">*</span></label>
+            <input type="text" id="job-skills" class="form-control" placeholder="e.g. Docker, Kubernetes, Linux, AWS, CI/CD" required />
           </div>
-        </div>
 
-        <div class="form-group">
-          <label class="form-label" for="job-skills-input">Required Skills (comma-separated) <span style="color: var(--accent-rose);">*</span></label>
-          <input type="text" id="job-skills-input" class="form-control" placeholder="e.g. Python, SQL, Flask, Docker" required />
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="job-desc-input">Job Description <span style="color: var(--accent-rose);">*</span></label>
-          <textarea id="job-desc-input" class="form-control" rows="3" placeholder="Describe role responsibilities, team, and requirements..." required></textarea>
-        </div>
-
-        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem;">
-          <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('job-modal')">Cancel</button>
-          <button type="submit" class="btn btn-primary btn-sm" id="save-job-submit-btn">Save Job Listing</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Applicants Viewer Modal -->
-  <div class="modal-overlay" id="applicants-modal">
-    <div class="modal-container" style="max-width: 850px;">
-      <div class="modal-header">
-        <h3 id="applicants-modal-title" style="font-size: 1.35rem;">Applicants List</h3>
-        <button class="modal-close" onclick="closeModal('applicants-modal')">&times;</button>
+          <div class="form-group">
+            <label class="form-label" for="job-description">Role Description & Responsibilities <span class="required">*</span></label>
+            <textarea id="job-description" class="form-control" rows="4" placeholder="Describe the day-to-day responsibilities, qualifications, and hiring timeline..." required></textarea>
+          </div>
+        </form>
       </div>
-
-      <div class="table-responsive" style="max-height: 480px; overflow-y: auto;">
-        <table class="table-custom">
-          <thead>
-            <tr>
-              <th>Applicant</th>
-              <th>College & CGPA</th>
-              <th>Skills</th>
-              <th>Resume</th>
-              <th>Status Action</th>
-            </tr>
-          </thead>
-          <tbody id="applicants-table-body"></tbody>
-        </table>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeModal('job-modal')">Cancel</button>
+        <button type="button" id="save-job-btn" class="btn btn-primary" onclick="submitJobForm()">Save Job Posting &rarr;</button>
       </div>
     </div>
   </div>

@@ -3,106 +3,126 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Student Profile — SmartHire Placement Portal</title>
+  <title>Student Profile Management — SmartHire</title>
+  <meta name="description" content="Update your academic credentials, technical skillset, and resume file." />
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
 
   <!-- Navigation Bar -->
-  <nav class="navbar">
+  <nav class="navbar" aria-label="Main Navigation">
     <div class="container nav-inner">
-      <a href="/index.html" class="brand-logo">
-        <div class="logo-icon">⚡</div>
+      <a href="/index.html" class="brand-logo" aria-label="SmartHire Home">
+        <div class="logo-icon" aria-hidden="true">⚡</div>
         <div>Smart<span class="highlight">Hire</span></div>
       </a>
       <ul class="nav-links" id="nav-links-container"></ul>
     </div>
   </nav>
 
-  <main style="padding: 2.5rem 0 4rem; flex: 1;">
-    <div class="container" style="max-width: 800px;">
+  <main class="page-wrapper">
+    <div class="container-narrow">
       
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+      <!-- Top Bar -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
         <div>
-          <h1 style="font-size: 2rem; margin-bottom: 0.3rem;">Student Profile Management</h1>
-          <p style="color: var(--text-muted); font-size: 0.95rem;">
-            Keep your skills and academic records up to date for recruiters.
+          <div class="hero-badge" style="margin-bottom: 0.5rem;">👤 Profile Settings</div>
+          <h1 style="font-size: 2rem; margin-bottom: 0.35rem;">Student Profile Management</h1>
+          <p style="color: var(--text-secondary); font-size: 0.95rem;">
+            Maintain your latest academic standing, competencies, and resume document.
           </p>
         </div>
         <a href="/dashboard.html" class="btn btn-secondary btn-sm">&larr; Back to Dashboard</a>
       </div>
 
-      <div class="card" style="padding: 2.5rem 2rem;">
-        <form id="profile-edit-form">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
-            
-            <div class="form-group">
-              <label class="form-label" for="profile-name">Full Name</label>
-              <input type="text" id="profile-name" class="form-control" required />
+      <div class="card" style="padding: 2.5rem; box-shadow: var(--shadow-lg);">
+        <form id="profile-edit-form" novalidate>
+          
+          <!-- Personal / Read-only Account -->
+          <div style="margin-bottom: 2rem;">
+            <h4 style="font-size: 1.05rem; margin-bottom: 1.1rem; color: var(--brand-cyan); border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">
+              1. Candidate Information
+            </h4>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="profile-name">Full Name <span class="required">*</span></label>
+                <input type="text" id="profile-name" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profile-email">Primary Email (Account ID)</label>
+                <input type="email" id="profile-email" class="form-control" disabled style="opacity: 0.7; cursor: not-allowed;" />
+              </div>
             </div>
-
             <div class="form-group">
-              <label class="form-label" for="profile-email">Email Address (Read-only)</label>
-              <input type="email" id="profile-email" class="form-control" disabled style="opacity: 0.7; cursor: not-allowed;" />
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="profile-phone">Phone Number</label>
+              <label class="form-label" for="profile-phone">Contact Mobile Number <span class="required">*</span></label>
               <input type="tel" id="profile-phone" class="form-control" required />
             </div>
+          </div>
 
+          <!-- Academic Record -->
+          <div style="margin-bottom: 2rem;">
+            <h4 style="font-size: 1.05rem; margin-bottom: 1.1rem; color: var(--brand-cyan); border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">
+              2. Academic Credentials
+            </h4>
             <div class="form-group">
-              <label class="form-label" for="profile-college">College / University</label>
+              <label class="form-label" for="profile-college">College / University <span class="required">*</span></label>
               <input type="text" id="profile-college" class="form-control" required />
             </div>
-
-            <div class="form-group">
-              <label class="form-label" for="profile-degree">Degree</label>
-              <select id="profile-degree" class="form-control" required>
-                <option value="B.Tech">B.Tech / B.E.</option>
-                <option value="M.Tech">M.Tech / M.E.</option>
-                <option value="BCA">BCA</option>
-                <option value="MCA">MCA</option>
-                <option value="B.Sc">B.Sc Computer Science / IT</option>
-                <option value="M.Sc">M.Sc Data Science / AI</option>
-              </select>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="profile-degree">Degree Program <span class="required">*</span></label>
+                <select id="profile-degree" class="form-control" required>
+                  <option value="B.Tech">B.Tech / B.E.</option>
+                  <option value="M.Tech">M.Tech / M.E.</option>
+                  <option value="BCA">BCA</option>
+                  <option value="MCA">MCA</option>
+                  <option value="B.Sc">B.Sc Computer Science / IT</option>
+                  <option value="M.Sc">M.Sc Data Science / AI</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profile-department">Department / Specialization <span class="required">*</span></label>
+                <input type="text" id="profile-department" class="form-control" required />
+              </div>
             </div>
-
-            <div class="form-group">
-              <label class="form-label" for="profile-department">Department / Branch</label>
-              <input type="text" id="profile-department" class="form-control" required />
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="profile-grad-year">Graduation Year <span class="required">*</span></label>
+                <input type="number" id="profile-grad-year" class="form-control" min="1990" max="2035" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profile-cgpa">CGPA (0.0 - 10.0) <span class="required">*</span></label>
+                <input type="number" id="profile-cgpa" step="0.01" min="0" max="10" class="form-control" required />
+              </div>
             </div>
-
-            <div class="form-group">
-              <label class="form-label" for="profile-grad-year">Graduation Year</label>
-              <input type="number" id="profile-grad-year" class="form-control" min="1990" max="2035" required />
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="profile-cgpa">CGPA (0 - 10.0)</label>
-              <input type="number" id="profile-cgpa" step="0.01" min="0" max="10" class="form-control" required />
-            </div>
-
           </div>
 
-          <div class="form-group" style="margin-top: 0.5rem;">
-            <label class="form-label" for="profile-skills">Technical Skills (comma-separated)</label>
-            <textarea id="profile-skills" class="form-control" rows="3" required></textarea>
-            <small style="color: var(--text-dim); font-size: 0.8rem;">Adding more verified skills boosts your skill match score with placement drives.</small>
+          <!-- Technical Skills & Resume -->
+          <div style="margin-bottom: 2.25rem;">
+            <h4 style="font-size: 1.05rem; margin-bottom: 1.1rem; color: var(--brand-cyan); border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">
+              3. Technical Skills & Resume Upload
+            </h4>
+            <div class="form-group">
+              <label class="form-label" for="profile-skills">Technical Skills (Comma-separated) <span class="required">*</span></label>
+              <textarea id="profile-skills" class="form-control" rows="3" required></textarea>
+              <div class="form-hint">Updating your skills recalculates match percentages across all placement drives.</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="profile-resume">Update Resume Document (.pdf, .doc, .docx - Max 5MB)</label>
+              <input type="file" id="profile-resume" class="form-control" accept=".pdf,.doc,.docx" />
+              <div id="current-resume-info" style="margin-top: 0.65rem; font-size: 0.875rem;"></div>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label class="form-label" for="profile-resume">Update Resume File (.pdf, .doc, .docx - max 5MB)</label>
-            <input type="file" id="profile-resume" class="form-control" accept=".pdf,.doc,.docx" />
-            <div id="current-resume-info" style="margin-top: 0.5rem; font-size: 0.85rem;"></div>
-          </div>
-
-          <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: flex-end;">
+          <!-- Save Button -->
+          <div style="display: flex; gap: 1rem; justify-content: flex-end; align-items: center;">
+            <a href="/dashboard.html" class="btn btn-secondary">Cancel</a>
             <button type="submit" id="save-profile-btn" class="btn btn-primary btn-lg">
-              <span id="save-btn-text">Save Changes</span>
-              <span id="save-btn-spinner" class="spinner" style="display: none; width: 18px; height: 18px;"></span>
+              Save Profile Changes &rarr;
             </button>
           </div>
+
         </form>
       </div>
 

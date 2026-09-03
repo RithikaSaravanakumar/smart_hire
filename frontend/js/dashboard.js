@@ -27,7 +27,8 @@ async function loadStudentDashboard() {
     // 2. Fetch all jobs count
     const jobsRes = await apiCall('/jobs', { requiresAuth: false });
     const totalJobs = jobsRes.count || (jobsRes.data ? jobsRes.data.length : 0);
-    document.getElementById('stat-total-jobs').textContent = totalJobs;
+    const totalJobsEl = document.getElementById('stat-total-jobs');
+    if (totalJobsEl) totalJobsEl.textContent = totalJobs;
 
     // 3. Fetch student applications
     if (profile.student_id) {
@@ -49,31 +50,31 @@ function renderProfileCard(profile) {
   const container = document.getElementById('profile-summary-card');
   if (!container) return;
 
-  const skillsList = profile.skills ? profile.skills.split(',').map(s => s.trim()) : [];
+  const skillsList = profile.skills ? profile.skills.split(',').map(s => s.trim()).filter(Boolean) : [];
 
   container.innerHTML = `
     <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1.5rem;">
       <div style="display: flex; gap: 1.25rem; align-items: center;">
-        <div style="width: 64px; height: 64px; border-radius: var(--radius-md); background: var(--grad-primary); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 800; color: #fff; box-shadow: var(--shadow-glow);">
+        <div style="width: 58px; height: 58px; border-radius: var(--radius-md); background: var(--grad-brand); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; font-weight: 800; color: #fff; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4); flex-shrink: 0;">
           ${escapeHtml((profile.name || 'S')[0].toUpperCase())}
         </div>
         <div>
-          <h2 style="font-size: 1.45rem; margin-bottom: 0.2rem;">${escapeHtml(profile.name || 'Student')}</h2>
-          <div style="color: var(--text-muted); font-size: 0.9rem;">
-            🏫 ${escapeHtml(profile.college || 'College')} &bull; ${escapeHtml(profile.degree || 'Degree')} in ${escapeHtml(profile.department || 'Department')} (Class of ${escapeHtml(profile.graduation_year || '2026')})
+          <h2 style="font-size: 1.4rem; margin-bottom: 0.25rem;">${escapeHtml(profile.name || 'Student Applicant')}</h2>
+          <div style="color: var(--text-secondary); font-size: 0.875rem;">
+            🏫 ${escapeHtml(profile.college || 'Engineering College')} &bull; ${escapeHtml(profile.degree || 'B.Tech')} in ${escapeHtml(profile.department || 'Computer Science')} (Class of ${escapeHtml(profile.graduation_year || '2026')})
           </div>
         </div>
       </div>
 
       <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
-        <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25); padding: 0.5rem 1rem; border-radius: var(--radius-md); text-align: center;">
-          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Current CGPA</div>
-          <div style="font-size: 1.25rem; font-weight: 800; color: #34d399;">${profile.cgpa ? parseFloat(profile.cgpa).toFixed(2) : 'N/A'} / 10.0</div>
+        <div style="background: var(--status-success-bg); border: 1px solid var(--status-success-border); padding: 0.45rem 1rem; border-radius: var(--radius-md); text-align: center;">
+          <div style="font-size: 0.725rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">Academic CGPA</div>
+          <div style="font-size: 1.2rem; font-weight: 800; color: var(--status-success);">${profile.cgpa ? parseFloat(profile.cgpa).toFixed(2) : 'N/A'} / 10.0</div>
         </div>
 
         ${profile.resume ? `
-          <a href="/uploads/${escapeHtml(profile.resume)}" target="_blank" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 0.4rem;">
-            📄 View Resume
+          <a href="/uploads/${escapeHtml(profile.resume)}" target="_blank" class="btn btn-secondary btn-sm">
+            📄 View Resume ↗
           </a>
         ` : `
           <a href="/profile.html" class="btn btn-outline btn-sm">📎 Upload Resume</a>
@@ -82,10 +83,10 @@ function renderProfileCard(profile) {
     </div>
 
     <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
-      <div style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase;">
-        Registered Competencies & Skills:
+      <div style="font-size: 0.775rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.45rem; text-transform: uppercase; letter-spacing: 0.05em;">
+        Verified Technical Competencies:
       </div>
-      <div class="skill-tags">
+      <div>
         ${skillsList.map(skill => `<span class="skill-badge matched">✓ ${escapeHtml(skill)}</span>`).join('')}
       </div>
     </div>
@@ -96,62 +97,14 @@ function calculateStats(totalJobs, applications) {
   const appliedCount = applications.length;
   const underReviewCount = applications.filter(a => a.status === 'Under Review').length;
   const shortlistedCount = applications.filter(a => a.status === 'Shortlisted' || a.status === 'Interview').length;
-  const selectedCount = applications.filter(a => a.status === 'Selected').length;
 
-  document.getElementById('stat-applied').textContent = appliedCount;
-  document.getElementById('stat-under-review').textContent = underReviewCount;
-  document.getElementById('stat-shortlisted').textContent = shortlistedCount;
-  document.getElementById('stat-selected').textContent = selectedCount;
-}
+  const statApplied = document.getElementById('stat-applied');
+  const statUnderReview = document.getElementById('stat-under-review');
+  const statShortlisted = document.getElementById('stat-shortlisted');
 
-function renderApplicationsTable(applications) {
-  const tbody = document.getElementById('applications-table-body');
-  const countBadge = document.getElementById('applications-count-badge');
-  if (!tbody) return;
-
-  countBadge.textContent = `${applications.length} Application${applications.length === 1 ? '' : 's'}`;
-
-  if (applications.length === 0) {
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="5">
-          <div class="empty-state">
-            <div class="empty-state-icon">📋</div>
-            <h3 style="margin-bottom: 0.4rem;">No applications yet</h3>
-            <p style="margin-bottom: 1rem;">Explore available placement drives and start applying!</p>
-            <a href="/jobs.html" class="btn btn-primary btn-sm">Browse Active Jobs &rarr;</a>
-          </div>
-        </td>
-      </tr>
-    `;
-    return;
-  }
-
-  tbody.innerHTML = applications.map(app => {
-    const job = app.job || {};
-    return `
-      <tr>
-        <td>
-          <strong style="color: var(--text-main); font-size: 0.95rem;">${escapeHtml(job.job_title || 'Unknown Position')}</strong>
-          <div style="font-size: 0.8rem; color: var(--text-muted);">📍 ${escapeHtml(job.location || 'N/A')}</div>
-        </td>
-        <td>
-          <span style="font-weight: 600; color: var(--accent-cyan);">${escapeHtml(job.company || 'N/A')}</span>
-        </td>
-        <td>
-          <span style="color: var(--text-muted); font-size: 0.88rem;">${formatDate(app.application_date)}</span>
-        </td>
-        <td>
-          ${renderStatusBadge(app.status)}
-        </td>
-        <td>
-          <button class="btn btn-danger btn-sm" onclick="promptWithdraw(${app.application_id}, '${escapeHtml(job.job_title)}')">
-            Withdraw
-          </button>
-        </td>
-      </tr>
-    `;
-  }).join('');
+  if (statApplied) statApplied.textContent = appliedCount;
+  if (statUnderReview) statUnderReview.textContent = underReviewCount;
+  if (statShortlisted) statShortlisted.textContent = shortlistedCount;
 }
 
 async function loadRecommendations() {
@@ -163,78 +116,126 @@ async function loadRecommendations() {
     const jobs = res.data || [];
 
     if (jobs.length === 0) {
-      container.innerHTML = `<div class="empty-state" style="grid-column: 1 / -1;"><p>No recommendations available. Update your skills to discover matching jobs.</p></div>`;
+      container.innerHTML = renderEmptyState(
+        'No AI Recommendations Available Yet',
+        'Update your technical skills on the Profile page to receive ranked job matches.',
+        '<a href="/profile.html" class="btn btn-primary btn-sm">Update Skills →</a>'
+      );
       return;
     }
 
     container.innerHTML = jobs.map(job => {
       const match = job.skill_match || {};
       return `
-        <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div class="card card-interactive" style="display: flex; flex-direction: column; justify-content: space-between;">
           <div>
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem; gap: 0.5rem;">
               <div>
                 <h3 style="font-size: 1.15rem; margin-bottom: 0.2rem;">${escapeHtml(job.job_title)}</h3>
-                <div style="color: var(--accent-cyan); font-weight: 600; font-size: 0.9rem;">${escapeHtml(job.company)}</div>
+                <div style="color: var(--brand-cyan); font-weight: 600; font-size: 0.9rem;">${escapeHtml(job.company)}</div>
               </div>
-              <span class="status-badge applied">${escapeHtml(job.experience)}</span>
+              <span class="badge" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-default); color: var(--text-secondary);">
+                📍 ${escapeHtml(job.location.split(',')[0])}
+              </span>
             </div>
 
-            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.6rem;">
-              📍 ${escapeHtml(job.location)}
+            <div style="margin-bottom: 0.85rem;">
+              ${renderMatchPill(match)}
+            </div>
+
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+              ${escapeHtml(job.description)}
             </p>
 
-            ${renderMatchPill(match)}
-
-            <div style="margin: 0.75rem 0 0.5rem;">
-              <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.3rem;">SKILL BREAKDOWN:</div>
-              <div class="skill-tags">
-                ${renderSkillBadges(job.skills, match.matching_skills || [], match.missing_skills || [])}
-              </div>
+            <div style="margin-bottom: 1.25rem;">
+              ${renderSkillBadges(job.skills, match.matching_skills || [], match.missing_skills || [])}
             </div>
           </div>
 
-          <div style="margin-top: 1rem; pt: 0.75rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-size: 0.78rem; color: var(--text-dim);">Match score: ${match.match_percentage || 0}%</span>
-            <a href="/jobs.html?job_id=${job.job_id}" class="btn btn-primary btn-sm">Apply Now &rarr;</a>
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Exp: ${escapeHtml(job.experience)}</span>
+            <button class="btn btn-primary btn-sm" onclick="directApplyFromDashboard(${job.job_id}, '${escapeHtml(job.job_title)}')">
+              Apply Now &rarr;
+            </button>
           </div>
         </div>
       `;
     }).join('');
 
   } catch (err) {
-    container.innerHTML = `<div class="empty-state" style="grid-column: 1 / -1;"><p style="color: var(--accent-rose);">Could not load recommendations.</p></div>`;
+    container.innerHTML = renderEmptyState('Recommendations Unavailable', 'Could not compute skill match: ' + err.message);
   }
 }
 
-function promptWithdraw(applicationId, jobTitle) {
-  pendingWithdrawId = applicationId;
-  const textEl = document.getElementById('withdraw-modal-text');
-  if (textEl) {
-    textEl.innerHTML = `Are you sure you want to withdraw your application for <strong>${jobTitle}</strong>?`;
+function renderApplicationsTable(applications) {
+  const tbody = document.getElementById('applications-table-body');
+  if (!tbody) return;
+
+  if (applications.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="5" style="text-align: center; padding: 3rem 1rem;">
+          <div style="font-size: 2.5rem; margin-bottom: 0.5rem; opacity: 0.6;">📝</div>
+          <h4 style="font-size: 1.15rem; margin-bottom: 0.35rem;">No Active Applications</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">You have not submitted any placement applications yet.</p>
+          <a href="/jobs.html" class="btn btn-primary btn-sm">Explore Open Placement Drives &rarr;</a>
+        </td>
+      </tr>
+    `;
+    return;
   }
-  openModal('withdraw-modal');
+
+  tbody.innerHTML = applications.map(app => {
+    const job = app.job || {};
+    return `
+      <tr>
+        <td>
+          <div style="font-weight: 600; color: var(--text-primary);">${escapeHtml(job.job_title || 'Position')}</div>
+          <div style="font-size: 0.85rem; color: var(--brand-cyan);">${escapeHtml(job.company || 'Company')}</div>
+        </td>
+        <td style="color: var(--text-secondary); font-size: 0.875rem;">
+          📍 ${escapeHtml(job.location || 'N/A')}
+        </td>
+        <td style="color: var(--text-muted); font-size: 0.875rem;">
+          ${formatDate(app.application_date)}
+        </td>
+        <td>
+          ${renderStatusBadge(app.status)}
+        </td>
+        <td style="text-align: right;">
+          <button class="btn btn-danger btn-sm" onclick="withdrawApplication(${app.application_id})">
+            Withdraw
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+async function directApplyFromDashboard(jobId, jobTitle) {
+  try {
+    await apiCall(`/jobs/${jobId}/apply`, { method: 'POST' });
+    showToast(`Application submitted successfully for ${jobTitle}!`, 'success');
+    loadStudentDashboard();
+  } catch (err) {
+    showToast(err.message || 'Could not submit application', 'error');
+  }
+}
+
+async function withdrawApplication(appId) {
+  if (!confirm('Are you sure you want to withdraw this application? This action cannot be undone.')) {
+    return;
+  }
+
+  try {
+    await apiCall(`/applications/${appId}`, { method: 'DELETE' });
+    showToast('Application withdrawn successfully', 'info');
+    loadStudentDashboard();
+  } catch (err) {
+    showToast('Failed to withdraw application: ' + err.message, 'error');
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   loadStudentDashboard();
-
-  const confirmBtn = document.getElementById('confirm-withdraw-btn');
-  if (confirmBtn) {
-    confirmBtn.addEventListener('click', async () => {
-      if (!pendingWithdrawId) return;
-      try {
-        confirmBtn.disabled = true;
-        await apiCall(`/applications/${pendingWithdrawId}`, { method: 'DELETE' });
-        showToast('Application withdrawn successfully', 'success');
-        closeModal('withdraw-modal');
-        loadStudentDashboard(); // reload table and statistics
-      } catch (err) {
-        showToast(err.message || 'Failed to withdraw application', 'error');
-      } finally {
-        confirmBtn.disabled = false;
-        pendingWithdrawId = null;
-      }
-    });
-  }
 });

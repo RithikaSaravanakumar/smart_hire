@@ -4,140 +4,141 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Student Registration — SmartHire Placement Portal</title>
+  <meta name="description" content="Create your verified student placement profile with academic background, skills, and resume." />
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
 
   <!-- Navigation Bar -->
-  <nav class="navbar">
+  <nav class="navbar" aria-label="Main Navigation">
     <div class="container nav-inner">
-      <a href="/index.html" class="brand-logo">
-        <div class="logo-icon">⚡</div>
+      <a href="/index.html" class="brand-logo" aria-label="SmartHire Home">
+        <div class="logo-icon" aria-hidden="true">⚡</div>
         <div>Smart<span class="highlight">Hire</span></div>
       </a>
       <ul class="nav-links" id="nav-links-container"></ul>
     </div>
   </nav>
 
-  <main style="padding: 3rem 0 4rem; flex: 1;">
-    <div class="container" style="max-width: 780px;">
-      <div class="card" style="padding: 2.5rem 2rem;">
+  <main class="page-wrapper">
+    <div class="container-narrow">
+      <div class="card" style="padding: 2.75rem 2.5rem; box-shadow: var(--shadow-lg);">
         
-        <div style="text-align: center; margin-bottom: 2rem;">
-          <div class="hero-badge">🎓 Student Enrollment</div>
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 2.25rem;">
+          <div class="hero-badge" style="margin-bottom: 0.85rem;">🎓 Student Enrollment</div>
           <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Create Your Placement Profile</h1>
-          <p style="color: var(--text-muted); font-size: 0.95rem;">
-            Fill in your verified academic details and skills to start receiving tailored job recommendations.
+          <p style="color: var(--text-secondary); font-size: 0.95rem;">
+            Provide your verified academic details and competencies to activate AI skill-fit recommendations.
           </p>
         </div>
 
         <form id="registration-form" novalidate>
           
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
-            <!-- Full Name -->
-            <div class="form-group">
-              <label class="form-label" for="name">Full Name <span style="color: var(--accent-rose);">*</span></label>
-              <input type="text" id="name" name="name" class="form-control" placeholder="e.g. Arjun Sharma" required />
-              <div class="field-error" id="name-error">Full name is required</div>
+          <!-- Section 1: Account Information -->
+          <div style="margin-bottom: 2rem;">
+            <h4 style="font-size: 1.05rem; margin-bottom: 1.1rem; color: var(--brand-cyan); border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">
+              1. Personal & Account Details
+            </h4>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="name">Full Name <span class="required">*</span></label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="e.g. Arjun Sharma" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email">Email Address <span class="required">*</span></label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="student@example.com" required />
+              </div>
             </div>
-
-            <!-- Email Address -->
-            <div class="form-group">
-              <label class="form-label" for="email">Email Address <span style="color: var(--accent-rose);">*</span></label>
-              <input type="email" id="email" name="email" class="form-control" placeholder="student@example.com" required />
-              <div class="field-error" id="email-error">Enter a valid email address</div>
-            </div>
-
-            <!-- Phone Number -->
-            <div class="form-group">
-              <label class="form-label" for="phone">Phone Number <span style="color: var(--accent-rose);">*</span></label>
-              <input type="tel" id="phone" name="phone" class="form-control" placeholder="10-digit Mobile (e.g. 9811223344)" required />
-              <div class="field-error" id="phone-error">Enter a valid 10-digit Indian phone number</div>
-            </div>
-
-            <!-- College Name -->
-            <div class="form-group">
-              <label class="form-label" for="college">College / University <span style="color: var(--accent-rose);">*</span></label>
-              <input type="text" id="college" name="college" class="form-control" placeholder="e.g. IIIT Bengaluru" required />
-              <div class="field-error" id="college-error">College name is required</div>
-            </div>
-
-            <!-- Degree -->
-            <div class="form-group">
-              <label class="form-label" for="degree">Degree <span style="color: var(--accent-rose);">*</span></label>
-              <select id="degree" name="degree" class="form-control" required>
-                <option value="">Select Degree</option>
-                <option value="B.Tech">B.Tech / B.E.</option>
-                <option value="M.Tech">M.Tech / M.E.</option>
-                <option value="BCA">BCA</option>
-                <option value="MCA">MCA</option>
-                <option value="B.Sc">B.Sc Computer Science / IT</option>
-                <option value="M.Sc">M.Sc Data Science / AI</option>
-              </select>
-              <div class="field-error" id="degree-error">Please select your degree</div>
-            </div>
-
-            <!-- Department -->
-            <div class="form-group">
-              <label class="form-label" for="department">Department / Specialization <span style="color: var(--accent-rose);">*</span></label>
-              <input type="text" id="department" name="department" class="form-control" placeholder="e.g. Computer Science & Engg" required />
-              <div class="field-error" id="department-error">Department is required</div>
-            </div>
-
-            <!-- Graduation Year -->
-            <div class="form-group">
-              <label class="form-label" for="graduation_year">Graduation Year <span style="color: var(--accent-rose);">*</span></label>
-              <input type="number" id="graduation_year" name="graduation_year" class="form-control" placeholder="2026" min="1990" max="2035" required />
-              <div class="field-error" id="graduation_year-error">Enter a valid year (1990 - 2035)</div>
-            </div>
-
-            <!-- CGPA -->
-            <div class="form-group">
-              <label class="form-label" for="cgpa">CGPA (out of 10) <span style="color: var(--accent-rose);">*</span></label>
-              <input type="number" id="cgpa" name="cgpa" step="0.01" min="0" max="10" class="form-control" placeholder="8.75" required />
-              <div class="field-error" id="cgpa-error">CGPA must be between 0.0 and 10.0</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="password">Account Password <span class="required">*</span></label>
+                <div class="password-input-wrapper">
+                  <input type="password" id="password" name="password" class="form-control" placeholder="Min. 6 characters" required />
+                  <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('password', this)" aria-label="Show password">👁️</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="phone">Phone Number <span class="required">*</span></label>
+                <input type="tel" id="phone" name="phone" class="form-control" placeholder="10-digit mobile (e.g. 9811223344)" required />
+              </div>
             </div>
           </div>
 
-          <!-- Skills -->
-          <div class="form-group" style="margin-top: 0.5rem;">
-            <label class="form-label" for="skills">Technical Skills (comma-separated) <span style="color: var(--accent-rose);">*</span></label>
-            <textarea id="skills" name="skills" class="form-control" rows="2" placeholder="e.g. Python, SQL, React, HTML, CSS, Git, Flask, REST APIs" required></textarea>
-            <div class="field-error" id="skills-error">List at least one skill</div>
+          <!-- Section 2: Academic Background -->
+          <div style="margin-bottom: 2rem;">
+            <h4 style="font-size: 1.05rem; margin-bottom: 1.1rem; color: var(--brand-cyan); border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">
+              2. Academic Credentials
+            </h4>
+            <div class="form-group">
+              <label class="form-label" for="college">College / University Name <span class="required">*</span></label>
+              <input type="text" id="college" name="college" class="form-control" placeholder="e.g. National Institute of Technology" required />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="degree">Degree Program <span class="required">*</span></label>
+                <select id="degree" name="degree" class="form-control" required>
+                  <option value="">Select Degree</option>
+                  <option value="B.Tech">B.Tech / B.E.</option>
+                  <option value="M.Tech">M.Tech / M.E.</option>
+                  <option value="BCA">BCA</option>
+                  <option value="MCA">MCA</option>
+                  <option value="B.Sc">B.Sc Computer Science / IT</option>
+                  <option value="M.Sc">M.Sc Data Science / AI</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="department">Department / Branch <span class="required">*</span></label>
+                <input type="text" id="department" name="department" class="form-control" placeholder="e.g. Computer Science & Engg" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="graduation_year">Graduation Year <span class="required">*</span></label>
+                <input type="number" id="graduation_year" name="graduation_year" class="form-control" placeholder="2026" min="1990" max="2035" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cgpa">CGPA (Scale 0.0 - 10.0) <span class="required">*</span></label>
+                <input type="number" id="cgpa" name="cgpa" step="0.01" min="0" max="10" class="form-control" placeholder="8.92" required />
+              </div>
+            </div>
           </div>
 
-          <!-- Password & Confirm Password -->
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+          <!-- Section 3: Technical Competencies & Resume -->
+          <div style="margin-bottom: 2.25rem;">
+            <h4 style="font-size: 1.05rem; margin-bottom: 1.1rem; color: var(--brand-cyan); border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">
+              3. Skills & Resume Upload
+            </h4>
             <div class="form-group">
-              <label class="form-label" for="password">Password <span style="color: var(--accent-rose);">*</span></label>
-              <input type="password" id="password" name="password" class="form-control" placeholder="Minimum 6 characters" required />
-              <div class="field-error" id="password-error">Password must be at least 6 characters</div>
+              <label class="form-label" for="skills">Technical Skills (Comma-separated) <span class="required">*</span></label>
+              <textarea id="skills" name="skills" class="form-control" rows="2" placeholder="e.g. Python, SQL, React, Flask, Docker, REST APIs, Git" required></textarea>
+              <div class="form-hint">These skills power your personalized placement recommendations.</div>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="confirm_password">Confirm Password <span style="color: var(--accent-rose);">*</span></label>
-              <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Re-enter password" required />
-              <div class="field-error" id="confirm_password-error">Passwords do not match</div>
+              <label class="form-label" for="resume">Upload Resume (PDF, DOC, DOCX - Max 5MB)</label>
+              <div class="file-upload-zone" onclick="document.getElementById('resume').click()">
+                <div class="upload-icon">📄</div>
+                <div style="font-weight: 600; color: var(--text-primary);" id="resume-filename-display">
+                  Click or drag and drop your resume file here
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+                  PDF format recommended for automated recruiter parsing
+                </div>
+                <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" style="display: none;" onchange="updateResumeDisplay(this)" />
+              </div>
             </div>
-          </div>
-
-          <!-- Resume Upload -->
-          <div class="form-group">
-            <label class="form-label" for="resume">Upload Resume (.pdf, .doc, .docx - max 5MB)</label>
-            <input type="file" id="resume" name="resume" class="form-control" accept=".pdf,.doc,.docx" />
-            <div class="field-error" id="resume-error">Invalid file format or file exceeds 5MB</div>
           </div>
 
           <!-- Submit Button -->
-          <div style="margin-top: 2rem;">
-            <button type="submit" id="submit-btn" class="btn btn-primary btn-block btn-lg">
-              <span id="btn-text">Register as Student</span>
-              <span id="btn-spinner" class="spinner" style="display: none; width: 20px; height: 20px;"></span>
+          <div>
+            <button type="submit" id="register-submit-btn" class="btn btn-primary btn-block btn-lg">
+              <span id="register-btn-text">Complete Student Enrollment &rarr;</span>
             </button>
           </div>
 
-          <div style="text-align: center; margin-top: 1.5rem; color: var(--text-muted); font-size: 0.92rem;">
-            Already have an account? <a href="/login.html" style="font-weight: 600;">Sign in here &rarr;</a>
+          <div style="text-align: center; margin-top: 1.75rem; color: var(--text-secondary); font-size: 0.925rem;">
+            Already enrolled? <a href="/login.html" style="font-weight: 600;">Sign in to your account &rarr;</a>
           </div>
 
         </form>
@@ -148,5 +149,16 @@
 
   <script src="/js/common.js"></script>
   <script src="/js/register.js"></script>
+  <script>
+    function updateResumeDisplay(input) {
+      const display = document.getElementById('resume-filename-display');
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        display.innerHTML = `Selected File: <strong style="color: var(--brand-cyan);">${escapeHtml(file.name)}</strong> (${(file.size / (1024 * 1024)).toFixed(2)} MB)`;
+      } else {
+        display.textContent = 'Click or drag and drop your resume file here';
+      }
+    }
+  </script>
 </body>
 </html>
