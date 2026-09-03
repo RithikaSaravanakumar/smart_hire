@@ -9,22 +9,30 @@ load_dotenv(basedir / '.env')
 
 def resolve_database_url() -> str:
     """
-    Resolve MySQL database connection string from standard DATABASE_URL
-    or Railway MySQL specific environment variables.
+    Resolve database connection string supporting:
+    1. Direct DATABASE_URL (SQLite locally, or MySQL in Railway/Cloud)
+    2. Railway MYSQL_URL or MYSQL_PRIVATE_URL
+    3. Individual Railway MySQL environment variables (MYSQLHOST, MYSQLPORT, etc.)
+    4. Local development fallback to SQLite
     """
+    flask_env = os.getenv('FLASK_ENV', 'development').lower()
+
     # 1. Check direct DATABASE_URL
     db_url = os.getenv('DATABASE_URL')
     if db_url:
+        db_url = db_url.strip()
         if db_url.startswith('mysql://'):
             return db_url.replace('mysql://', 'mysql+pymysql://', 1)
         return db_url
 
-    # 2. Check Railway MYSQL_URL
-    mysql_url = os.getenv('MYSQL_URL')
-    if mysql_url:
-        if mysql_url.startswith('mysql://'):
-            return mysql_url.replace('mysql://', 'mysql+pymysql://', 1)
-        return mysql_url
+    # 2. Check Railway MYSQL_URL or MYSQL_PRIVATE_URL
+    for env_var in ['MYSQL_URL', 'MYSQL_PRIVATE_URL']:
+        url = os.getenv(env_var)
+        if url:
+            url = url.strip()
+            if url.startswith('mysql://'):
+                return url.replace('mysql://', 'mysql+pymysql://', 1)
+            return url
 
     # 3. Check individual Railway MySQL variables
     host = os.getenv('MYSQLHOST')
@@ -35,7 +43,15 @@ def resolve_database_url() -> str:
         database = os.getenv('MYSQLDATABASE', 'railway')
         return f"mysql+pymysql://{user}:{password}@{host}:{port}/{database}"
 
-    # 4. Default local development fallback to SQLite
+    # 4. Production guard: In production, require an explicit database configuration
+    if flask_env == 'production':
+        # Railway or cloud deployment must supply a persistent DATABASE_URL
+        raise RuntimeError(
+            "FATAL: Running in production mode (FLASK_ENV=production) but no DATABASE_URL or MySQL variables found. "
+            "Please configure DATABASE_URL in Railway Dashboard."
+        )
+
+    # 5. Default local development fallback to SQLite
     return f"sqlite:///{basedir / 'smarthire.db'}"
 
 class Config:
