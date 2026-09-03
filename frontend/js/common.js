@@ -431,10 +431,30 @@ function initNavbarScrollEffect() {
   }, { passive: true });
 }
 
+// --- Scroll-To-Reveal Animation Observer ---
+function initScrollReveal() {
+  const revealElements = document.querySelectorAll('.reveal-on-scroll');
+  if (!revealElements.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal-visible');
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -30px 0px'
+  });
+
+  revealElements.forEach(el => observer.observe(el));
+}
+
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
   updateNavbar();
   updateThemeToggleButtons();
   initCounterAnimation();
   initNavbarScrollEffect();
+  initScrollReveal();
 });

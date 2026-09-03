@@ -2324,8 +2324,82 @@ strong {
   .nav-links.mobile-open {
     display: flex;
   }
-  
+
   .mobile-toggle {
     display: block;
   }
+}
+
+/* ==========================================================================
+   Scroll-To-Reveal Animation Engine & Interactive Hover Effects
+   ========================================================================== */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.reveal-left {
+  transform: translateX(-35px);
+}
+
+.reveal-on-scroll.reveal-right {
+  transform: translateX(35px);
+}
+
+.reveal-on-scroll.reveal-scale {
+  transform: scale(0.94);
+}
+
+.reveal-on-scroll.reveal-visible {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+/* Staggered Delay Tokens */
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+.reveal-delay-5 { transition-delay: 0.40s; }
+.reveal-delay-6 { transition-delay: 0.48s; }
+
+/* Interactive Hover Effects & Micro-animations */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transform: rotate(30deg) translateX(-100%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.btn-primary:hover::after {
+  transform: rotate(30deg) translateX(100%);
+}
+
+.card, .feature-card-pro, .step-card-modern, .category-card-pro, .ai-showcase-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover, .feature-card-pro:hover, .step-card-modern:hover {
+  transform: translateY(-5px);
+}
+
+.category-card-pro:hover {
+  transform: translateY(-4px) scale(1.01);
+}
+
+.btn:active {
+  transform: scale(0.97) !important;
 }
