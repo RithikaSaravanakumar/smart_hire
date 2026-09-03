@@ -10,23 +10,15 @@ load_dotenv(basedir / '.env')
 def resolve_database_url() -> str:
     """
     Resolve database connection string supporting:
-    1. Direct DATABASE_URL (SQLite locally, or MySQL in Railway/Cloud)
-    2. Railway MYSQL_URL or MYSQL_PRIVATE_URL
-    3. Individual Railway MySQL environment variables (MYSQLHOST, MYSQLPORT, etc.)
+    1. Railway MYSQL_PRIVATE_URL or MYSQL_URL (Private networking in Railway)
+    2. Individual Railway MySQL environment variables (MYSQLHOST, MYSQLPASSWORD, etc.)
+    3. Direct DATABASE_URL (SQLite locally, or explicit DB URL)
     4. Local development fallback to SQLite
     """
     flask_env = os.getenv('FLASK_ENV', 'development').lower()
 
-    # 1. Check direct DATABASE_URL
-    db_url = os.getenv('DATABASE_URL')
-    if db_url:
-        db_url = db_url.strip()
-        if db_url.startswith('mysql://'):
-            return db_url.replace('mysql://', 'mysql+pymysql://', 1)
-        return db_url
-
-    # 2. Check Railway MYSQL_URL or MYSQL_PRIVATE_URL
-    for env_var in ['MYSQL_URL', 'MYSQL_PRIVATE_URL']:
+    # 1. Check Railway Private / Direct MySQL URLs first
+    for env_var in ['MYSQL_PRIVATE_URL', 'MYSQL_URL']:
         url = os.getenv(env_var)
         if url:
             url = url.strip()
@@ -34,7 +26,7 @@ def resolve_database_url() -> str:
                 return url.replace('mysql://', 'mysql+pymysql://', 1)
             return url
 
-    # 3. Check individual Railway MySQL variables
+    # 2. Check individual Railway MySQL variables (direct from Railway MySQL service)
     host = os.getenv('MYSQLHOST')
     if host:
         user = os.getenv('MYSQLUSER', 'root')
@@ -42,6 +34,14 @@ def resolve_database_url() -> str:
         port = os.getenv('MYSQLPORT', '3306')
         database = os.getenv('MYSQLDATABASE', 'railway')
         return f"mysql+pymysql://{user}:{password}@{host}:{port}/{database}"
+
+    # 3. Check direct DATABASE_URL
+    db_url = os.getenv('DATABASE_URL')
+    if db_url:
+        db_url = db_url.strip()
+        if db_url.startswith('mysql://'):
+            return db_url.replace('mysql://', 'mysql+pymysql://', 1)
+        return db_url
 
     # 4. Production guard: In production, require an explicit database configuration
     if flask_env == 'production':
