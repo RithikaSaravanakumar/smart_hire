@@ -15,34 +15,36 @@ async function loadProfile() {
     const user = res.data;
     const profile = user.profile || {};
 
-    if (user.role !== 'student' || !profile.student_id) {
-      showToast('Profile management is only available for student accounts', 'warning');
-      setTimeout(() => { window.location.href = '/index.html'; }, 1000);
+    if (user.role !== 'student') {
+      showToast('Profile view is for student accounts', 'info');
+      window.location.href = '/dashboard.html';
       return;
     }
 
     currentStudentId = profile.student_id;
 
-    document.getElementById('profile-name').value = profile.name || '';
-    document.getElementById('profile-email').value = user.email || '';
-    document.getElementById('profile-phone').value = profile.phone || '';
-    document.getElementById('profile-college').value = profile.college || '';
-    document.getElementById('profile-degree').value = profile.degree || 'B.Tech';
-    document.getElementById('profile-department').value = profile.department || '';
-    document.getElementById('profile-grad-year').value = profile.graduation_year || 2026;
-    document.getElementById('profile-cgpa').value = profile.cgpa || '';
-    document.getElementById('profile-skills').value = profile.skills || '';
+    if (document.getElementById('profile-name')) document.getElementById('profile-name').value = profile.name || '';
+    if (document.getElementById('profile-email')) document.getElementById('profile-email').value = user.email || '';
+    if (document.getElementById('profile-phone')) document.getElementById('profile-phone').value = profile.phone || '';
+    if (document.getElementById('profile-college')) document.getElementById('profile-college').value = profile.college || '';
+    if (document.getElementById('profile-degree')) document.getElementById('profile-degree').value = profile.degree || 'B.Tech';
+    if (document.getElementById('profile-department')) document.getElementById('profile-department').value = profile.department || '';
+    if (document.getElementById('profile-grad-year')) document.getElementById('profile-grad-year').value = profile.graduation_year || 2026;
+    if (document.getElementById('profile-cgpa')) document.getElementById('profile-cgpa').value = profile.cgpa || '';
+    if (document.getElementById('profile-skills')) document.getElementById('profile-skills').value = profile.skills || '';
 
     const resumeInfo = document.getElementById('current-resume-info');
-    if (profile.resume) {
-      resumeInfo.innerHTML = `
-        <span style="color: #34d399;">✓ Current resume uploaded:</span> 
-        <a href="/uploads/${escapeHtml(profile.resume)}" target="_blank" style="color: var(--brand-accent); font-weight: 600; text-decoration: underline;">
-          View / Download Resume ↗
-        </a>
-      `;
-    } else {
-      resumeInfo.innerHTML = `<span style="color: var(--accent-amber);">⚠ No resume currently uploaded.</span>`;
+    if (resumeInfo) {
+      if (profile.resume) {
+        resumeInfo.innerHTML = `
+          <span style="color: var(--status-success);">✓ Current resume on file:</span> 
+          <a href="/uploads/${escapeHtml(profile.resume)}" target="_blank" style="color: var(--brand-accent); font-weight: 600; text-decoration: underline;">
+            View / Download Resume ↗
+          </a>
+        `;
+      } else {
+        resumeInfo.innerHTML = `<span style="color: var(--status-warning);">⚠ No resume currently uploaded.</span>`;
+      }
     }
 
   } catch (err) {
@@ -54,13 +56,17 @@ document.addEventListener('DOMContentLoaded', () => {
   loadProfile();
 
   const form = document.getElementById('profile-edit-form');
-  const saveBtn = document.getElementById('save-profile-btn');
-  const btnText = document.getElementById('save-btn-text');
-  const btnSpinner = document.getElementById('save-btn-spinner');
+  const saveBtn = document.getElementById('save-profile-btn') || document.getElementById('save-btn');
+
+  if (!form) return;
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (!currentStudentId) return;
+
+    if (!currentStudentId) {
+      showToast('Profile ID not loaded', 'error');
+      return;
+    }
 
     const formData = new FormData();
     formData.append('name', document.getElementById('profile-name').value.trim());
@@ -73,13 +79,14 @@ document.addEventListener('DOMContentLoaded', () => {
     formData.append('skills', document.getElementById('profile-skills').value.trim());
 
     const resumeInput = document.getElementById('profile-resume');
-    if (resumeInput.files && resumeInput.files[0]) {
+    if (resumeInput && resumeInput.files && resumeInput.files[0]) {
       formData.append('resume', resumeInput.files[0]);
     }
 
-    saveBtn.disabled = true;
-    btnText.textContent = 'Saving...';
-    btnSpinner.style.display = 'inline-block';
+    if (saveBtn) {
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Saving Changes...';
+    }
 
     try {
       const res = await apiCall(`/students/${currentStudentId}/profile`, {
@@ -93,9 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (err) {
       showToast(err.message || 'Failed to update profile', 'error');
     } finally {
-      saveBtn.disabled = false;
-      btnText.textContent = 'Save Changes';
-      btnSpinner.style.display = 'none';
+      if (saveBtn) {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Profile Changes →';
+      }
     }
   });
 });

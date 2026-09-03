@@ -6,6 +6,8 @@ function quickFill(role) {
   const emailInput = document.getElementById('login-email');
   const passwordInput = document.getElementById('login-password');
 
+  if (!emailInput || !passwordInput) return;
+
   if (role === 'student') {
     emailInput.value = 'arjun.sharma@example.com';
     passwordInput.value = 'Student@123456';
@@ -22,35 +24,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('login-form');
   const emailInput = document.getElementById('login-email');
   const passwordInput = document.getElementById('login-password');
-  const toggleBtn = document.getElementById('toggle-password-btn');
   const submitBtn = document.getElementById('login-submit-btn');
   const btnText = document.getElementById('login-btn-text');
-  const btnSpinner = document.getElementById('login-btn-spinner');
 
-  // Toggle Password Visibility
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', () => {
-      const isPassword = passwordInput.type === 'password';
-      passwordInput.type = isPassword ? 'text' : 'password';
-      toggleBtn.textContent = isPassword ? 'Hide Password' : 'Show Password';
-    });
-  }
+  if (!form) return;
 
-  // Handle Login Submission
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const email = emailInput.value.trim();
-    const password = passwordInput.value;
+    const email = emailInput ? emailInput.value.trim() : '';
+    const password = passwordInput ? passwordInput.value : '';
 
     if (!email || !password) {
       showToast('Please enter both email and password', 'warning');
       return;
     }
 
-    submitBtn.disabled = true;
-    btnText.textContent = 'Authenticating...';
-    btnSpinner.style.display = 'inline-block';
+    if (submitBtn) submitBtn.disabled = true;
+    if (btnText) btnText.textContent = 'Authenticating...';
 
     try {
       const res = await apiCall('/login', {
@@ -77,14 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           window.location.href = '/index.html';
         }
-      }, 600);
+      }, 500);
 
     } catch (err) {
       showToast(err.message || 'Invalid email or password. Please try again.', 'error');
-    } finally {
-      submitBtn.disabled = false;
-      btnText.textContent = 'Sign In';
-      btnSpinner.style.display = 'none';
+      if (submitBtn) submitBtn.disabled = false;
+      if (btnText) btnText.textContent = 'Sign In →';
     }
   });
 });
