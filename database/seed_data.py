@@ -296,7 +296,7 @@ def seed_database(drop_existing=False):
 
         db.session.commit()
         print("\n=========================================================")
-        print("[✔] SmartHire Database Initialized & Seeded Successfully!")
+        print("[SUCCESS] SmartHire Database Initialized & Seeded Successfully!")
         print("=========================================================\n")
 
 if __name__ == "__main__":
