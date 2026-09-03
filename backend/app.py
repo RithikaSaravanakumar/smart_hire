@@ -332,7 +332,8 @@ def create_app(config_class=Config):
 
     @app.errorhandler(500)
     def internal_error(e):
-        app.logger.error(f"Internal server error: {e}")
+        import traceback
+        app.logger.error(f"Internal server error: {e}\n{traceback.format_exc()}")
         return jsonify({'success': False, 'message': 'An internal server error occurred. Please try again later.', 'error_code': 'INTERNAL_SERVER_ERROR'}), 500
 
     with app.app_context():

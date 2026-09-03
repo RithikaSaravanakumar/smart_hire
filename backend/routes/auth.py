@@ -178,46 +178,56 @@ def login():
     """
     Authenticate a user (Student, Recruiter, Admin) and issue a signed JWT.
     """
-    data = request.get_json() or {}
-    email = data.get('email', '').strip().lower()
-    password = data.get('password', '')
+    try:
+        data = request.get_json() or {}
+        email = data.get('email', '').strip().lower()
+        password = data.get('password', '')
 
-    if not email or not password:
+        if not email or not password:
+            return jsonify({
+                'success': False,
+                'message': 'Both email and password are required',
+                'error_code': 'MISSING_CREDENTIALS'
+            }), 400
+
+        user = User.query.filter_by(email=email).first()
+        if not user or not user.check_password(password):
+            return jsonify({
+                'success': False,
+                'message': 'Invalid email or password',
+                'error_code': 'INVALID_CREDENTIALS'
+            }), 401
+
+        token = generate_token(user)
+
+        profile_data = {}
+        if user.role == 'student' and user.student_profile:
+            profile_data = user.student_profile.to_dict(include_user_info=False)
+        elif user.role == 'recruiter' and user.recruiter_profile:
+            profile_data = user.recruiter_profile.to_dict(include_user_info=False)
+
         return jsonify({
-            'success': False,
-            'message': 'Both email and password are required',
-            'error_code': 'MISSING_CREDENTIALS'
-        }), 400
-
-    user = User.query.filter_by(email=email).first()
-    if not user or not user.check_password(password):
-        return jsonify({
-            'success': False,
-            'message': 'Invalid email or password',
-            'error_code': 'INVALID_CREDENTIALS'
-        }), 401
-
-    token = generate_token(user)
-
-    profile_data = {}
-    if user.role == 'student' and user.student_profile:
-        profile_data = user.student_profile.to_dict(include_user_info=False)
-    elif user.role == 'recruiter' and user.recruiter_profile:
-        profile_data = user.recruiter_profile.to_dict(include_user_info=False)
-
-    return jsonify({
-        'success': True,
-        'message': 'Login successful',
-        'data': {
-            'token': token,
-            'user': {
-                'user_id': user.user_id,
-                'email': user.email,
-                'role': user.role,
-                'profile': profile_data
+            'success': True,
+            'message': 'Login successful',
+            'data': {
+                'token': token,
+                'user': {
+                    'user_id': user.user_id,
+                    'email': user.email,
+                    'role': user.role,
+                    'profile': profile_data
+                }
             }
-        }
-    }), 200
+        }), 200
+
+    except Exception as err:
+        import traceback
+        current_app.logger.error(f"Login failure error: {err}\n{traceback.format_exc()}")
+        return jsonify({
+            'success': False,
+            'message': f"Authentication failed: {str(err)}",
+            'error_code': 'AUTH_ERROR'
+        }), 500
 
 
 @auth_bp.route('/me', methods=['GET'])
