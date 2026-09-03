@@ -339,8 +339,14 @@ def create_app(config_class=Config):
         try:
             # Safe table creation (never drops existing data in production)
             db.create_all()
+            # Automatically populate initial demo accounts & jobs if database is fresh
+            from backend.models import User
+            if not User.query.filter_by(role='admin').first():
+                app.logger.info("[SmartHire] Initializing fresh database with default accounts & placement drives...")
+                from database.seed_data import seed_database
+                seed_database(drop_existing=False)
         except Exception as err:
-            app.logger.warning(f"Note: db.create_all() skipped or handled: {err}")
+            app.logger.warning(f"Note: Database initialization check: {err}")
 
     return app
 
