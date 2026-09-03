@@ -188,13 +188,14 @@ function updateNavbar() {
     // Public / Visitor
     links = `
       <li><a href="/index.html" class="nav-link ${currentPath === '/' || currentPath.endsWith('index.html') ? 'active' : ''}">Home</a></li>
+      <li><a href="/index.html#about" class="nav-link">About</a></li>
       <li><a href="/jobs.html" class="nav-link ${currentPath.includes('jobs') ? 'active' : ''}">Jobs</a></li>
       <li><a href="/index.html#features" class="nav-link">Features</a></li>
       <li><a href="/index.html#how-it-works" class="nav-link">Workflow</a></li>
       <li><a href="/index.html#categories" class="nav-link">Categories</a></li>
       <li><a href="/index.html#employers" class="nav-link">Employers</a></li>
       <li><a href="/login.html" class="btn btn-secondary btn-sm">Sign In</a></li>
-      <li><a href="/register.html" class="btn btn-primary btn-sm">Get Started</a></li>
+      <li><a href="/register.html" class="btn btn-primary btn-sm">Register</a></li>
       ${themeToggleHtml}
     `;
   } else if (role === 'student') {
