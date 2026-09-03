@@ -1,10 +1,50 @@
 /**
  * SmartHire — Enterprise Violet SaaS Client Core Module
- * Manages API communication, JWT authentication, UI Modals, Status Badges, Toast Alerts & Skeletons
+ * Features: Dark/Light Mode Engine, JWT Auth, Modals, Status Badges, Toast Alerts & Skeletons
  */
 
 const API_BASE_URL = window.SMART_HIRE_API_URL || '/api';
 const API_BASE = API_BASE_URL;
+
+// --- Theme Management (Dark & Light Mode) ---
+function getSavedTheme() {
+  return localStorage.getItem('smarthire_theme') || 'dark';
+}
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('smarthire_theme', theme);
+  updateThemeToggleButtons();
+}
+
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  applyTheme(newTheme);
+  showToast(`Switched to ${newTheme.toUpperCase()} mode`, 'info', 2000);
+}
+
+function updateThemeToggleButtons() {
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+  const buttons = document.querySelectorAll('.theme-toggle-btn');
+  buttons.forEach(btn => {
+    if (currentTheme === 'light') {
+      btn.innerHTML = '🌙 Dark';
+      btn.setAttribute('title', 'Switch to Dark Mode');
+      btn.setAttribute('aria-label', 'Switch to Dark Mode');
+    } else {
+      btn.innerHTML = '☀️ Light';
+      btn.setAttribute('title', 'Switch to Light Mode');
+      btn.setAttribute('aria-label', 'Switch to Light Mode');
+    }
+  });
+}
+
+// Immediately apply saved theme to avoid FOUC
+(function () {
+  const savedTheme = localStorage.getItem('smarthire_theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+})();
 
 // --- Authentication & Token Storage Helpers ---
 function getToken() {
@@ -69,7 +109,7 @@ async function apiCall(endpoint, { method = 'GET', data = null, isFormData = fal
 
   if (data) {
     if (isFormData) {
-      options.body = data; // Browser sets multipart boundary automatically
+      options.body = data;
     } else {
       headers['Content-Type'] = 'application/json';
       options.body = JSON.stringify(data);
@@ -81,7 +121,6 @@ async function apiCall(endpoint, { method = 'GET', data = null, isFormData = fal
     const result = await response.json();
 
     if (!response.ok) {
-      // Auto-logout if token expired or invalid
       if (response.status === 401 && requiresAuth && !endpoint.includes('/login')) {
         showToast(result.message || 'Session expired. Please log in again.', 'error');
         setToken(null);
@@ -125,7 +164,7 @@ function showToast(message, type = 'info', duration = 3500) {
   }, duration);
 }
 
-// --- Strict Role-Based Navbar ---
+// --- Strict Role-Based Navbar with Theme Toggle ---
 function updateNavbar() {
   const navContainer = document.getElementById('nav-links-container');
   if (!navContainer) return;
@@ -135,18 +174,27 @@ function updateNavbar() {
   const role = user ? user.role : null;
   const currentPath = window.location.pathname;
 
+  const themeToggleHtml = `
+    <li>
+      <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Light / Dark Theme">
+        ☀️ Light
+      </button>
+    </li>
+  `;
+
   let links = '';
 
   if (!auth || !user) {
-    // Guest / Public Visitor Navigation
+    // Public / Visitor
     links = `
       <li><a href="/index.html" class="nav-link ${currentPath === '/' || currentPath.includes('index') ? 'active' : ''}">Home</a></li>
       <li><a href="/jobs.html" class="nav-link ${currentPath.includes('jobs') ? 'active' : ''}">Explore Jobs</a></li>
       <li><a href="/login.html" class="btn btn-secondary btn-sm">Sign In</a></li>
       <li><a href="/register.html" class="btn btn-primary btn-sm">Get Started</a></li>
+      ${themeToggleHtml}
     `;
   } else if (role === 'student') {
-    // Student Navigation
+    // Student
     links = `
       <li><a href="/index.html" class="nav-link ${currentPath === '/' || currentPath.includes('index') ? 'active' : ''}">Home</a></li>
       <li><a href="/jobs.html" class="nav-link ${currentPath.includes('jobs') ? 'active' : ''}">Jobs</a></li>
@@ -157,22 +205,24 @@ function updateNavbar() {
           <span>●</span> ${escapeHtml(user.email.split('@')[0])}
         </span>
       </li>
+      ${themeToggleHtml}
       <li><button onclick="logout()" class="btn btn-secondary btn-sm">Sign Out</button></li>
     `;
   } else if (role === 'recruiter') {
-    // Recruiter Navigation
+    // Recruiter
     links = `
       <li><a href="/recruiter-dashboard.html" class="nav-link ${currentPath.includes('recruiter') ? 'active' : ''}">Dashboard</a></li>
       <li><a href="javascript:void(0)" onclick="openCreateJobModal()" class="btn btn-primary btn-sm">+ Post Job</a></li>
       <li>
-        <span class="nav-user-badge" style="background: rgba(192, 132, 252, 0.15); border-color: rgba(192, 132, 252, 0.35); color: var(--brand-magenta);">
+        <span class="nav-user-badge" style="background: rgba(147, 51, 234, 0.12); border-color: rgba(147, 51, 234, 0.3); color: var(--brand-magenta);">
           <span>🏢</span> ${escapeHtml(user.email.split('@')[0])}
         </span>
       </li>
+      ${themeToggleHtml}
       <li><button onclick="logout()" class="btn btn-secondary btn-sm">Sign Out</button></li>
     `;
   } else if (role === 'admin') {
-    // Admin Navigation
+    // Admin
     links = `
       <li><a href="/admin-dashboard.html" class="nav-link ${currentPath.includes('admin') ? 'active' : ''}">Dashboard</a></li>
       <li><a href="/api/docs" target="_blank" class="nav-link" style="color: var(--brand-accent);">API Docs ↗</a></li>
@@ -181,11 +231,13 @@ function updateNavbar() {
           <span>👑</span> Admin Control
         </span>
       </li>
+      ${themeToggleHtml}
       <li><button onclick="logout()" class="btn btn-secondary btn-sm">Sign Out</button></li>
     `;
   }
 
   navContainer.innerHTML = links;
+  updateThemeToggleButtons();
 }
 
 // Mobile Toggle Handler
@@ -319,7 +371,8 @@ function renderSkillBadges(skillsStr, matchedList = [], missingList = []) {
   }).join(' ');
 }
 
-// Initialize Navbar on page load
+// Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
   updateNavbar();
+  updateThemeToggleButtons();
 });
