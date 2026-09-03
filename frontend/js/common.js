@@ -187,8 +187,12 @@ function updateNavbar() {
   if (!auth || !user) {
     // Public / Visitor
     links = `
-      <li><a href="/index.html" class="nav-link ${currentPath === '/' || currentPath.includes('index') ? 'active' : ''}">Home</a></li>
-      <li><a href="/jobs.html" class="nav-link ${currentPath.includes('jobs') ? 'active' : ''}">Explore Jobs</a></li>
+      <li><a href="/index.html" class="nav-link ${currentPath === '/' || currentPath.endsWith('index.html') ? 'active' : ''}">Home</a></li>
+      <li><a href="/jobs.html" class="nav-link ${currentPath.includes('jobs') ? 'active' : ''}">Jobs</a></li>
+      <li><a href="/index.html#features" class="nav-link">Features</a></li>
+      <li><a href="/index.html#how-it-works" class="nav-link">Workflow</a></li>
+      <li><a href="/index.html#categories" class="nav-link">Categories</a></li>
+      <li><a href="/index.html#employers" class="nav-link">Employers</a></li>
       <li><a href="/login.html" class="btn btn-secondary btn-sm">Sign In</a></li>
       <li><a href="/register.html" class="btn btn-primary btn-sm">Get Started</a></li>
       ${themeToggleHtml}
@@ -371,8 +375,65 @@ function renderSkillBadges(skillsStr, matchedList = [], missingList = []) {
   }).join(' ');
 }
 
+// --- Animated Counters Engine ---
+function initCounterAnimation() {
+  const counterElements = document.querySelectorAll('[data-counter-target]');
+  if (!counterElements.length) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseFloat(el.getAttribute('data-counter-target'));
+        const prefix = el.getAttribute('data-counter-prefix') || '';
+        const suffix = el.getAttribute('data-counter-suffix') || '';
+        const decimals = parseInt(el.getAttribute('data-counter-decimals') || '0', 10);
+        const duration = 1800; // ms
+        const startTime = performance.now();
+
+        function updateCount(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease-out cubic
+          const easeOut = 1 - Math.pow(1 - progress, 3);
+          const currentVal = (target * easeOut).toFixed(decimals);
+          
+          el.textContent = `${prefix}${Number(currentVal).toLocaleString()}${suffix}`;
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCount);
+          } else {
+            el.textContent = `${prefix}${target.toLocaleString()}${suffix}`;
+          }
+        }
+
+        requestAnimationFrame(updateCount);
+        obs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  counterElements.forEach(el => observer.observe(el));
+}
+
+// --- Navbar Glass Scroll Enhancer ---
+function initNavbarScrollEffect() {
+  const navbar = document.querySelector('.navbar');
+  if (!navbar) return;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      navbar.classList.add('navbar-scrolled');
+    } else {
+      navbar.classList.remove('navbar-scrolled');
+    }
+  }, { passive: true });
+}
+
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
   updateNavbar();
   updateThemeToggleButtons();
+  initCounterAnimation();
+  initNavbarScrollEffect();
 });

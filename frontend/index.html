@@ -3,13 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SmartHire — Modern Student Placement & Talent Acquisition Platform</title>
-  <meta name="description" content="AI-driven placement platform matching verified student competencies with enterprise campus opportunities in real time." />
+  <title>SmartHire — Next-Gen AI Placement & Talent Acquisition Platform</title>
+  <meta name="description" content="AI-driven recruitment and campus placement platform connecting verified student competencies with enterprise hiring opportunities in real time." />
+  
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
 
-  <!-- Navigation Bar -->
+  <!-- Navigation Bar (Sticky Glassmorphic) -->
   <nav class="navbar" aria-label="Main Navigation">
     <div class="container nav-inner">
       <a href="/index.html" class="brand-logo" aria-label="SmartHire Home">
@@ -18,94 +24,393 @@
       </a>
       <button class="mobile-toggle" onclick="toggleMobileNav()" aria-label="Toggle navigation menu">☰</button>
       <ul class="nav-links" id="nav-links-container">
-        <!-- Dynamically rendered via common.js based on role -->
+        <!-- Dynamically rendered via common.js based on role/auth state -->
       </ul>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <header class="hero-section">
-    <div class="container">
-      <div class="hero-badge">
-        <span>✨ Intelligent AI-Powered Skill-Fit Intelligence</span>
-      </div>
-      <h1 class="hero-title">
-        The Modern Standard for <br />
-        <span class="gradient-text">Campus Placements & Hiring</span>
-      </h1>
-      <p class="hero-subtitle">
-        SmartHire seamlessly connects ambitious students, university talent cells, and enterprise recruiters through automated skill gap analysis and real-time application pipelines.
-      </p>
-      <div class="hero-actions">
-        <a href="/register.html" class="btn btn-primary btn-lg">Get Started Free &rarr;</a>
-        <a href="/jobs.html" class="btn btn-secondary btn-lg">Explore Active Drives</a>
-      </div>
+  <!-- Hero Section with Ambient Glows & Interactive Visual -->
+  <header class="landing-hero-wrapper">
+    <!-- Ambient Animated Gradient Blobs -->
+    <div class="ambient-glow-blob glow-blob-1" aria-hidden="true"></div>
+    <div class="ambient-glow-blob glow-blob-2" aria-hidden="true"></div>
+    <div class="ambient-glow-blob glow-blob-3" aria-hidden="true"></div>
+    <div class="ai-grid-overlay" aria-hidden="true"></div>
 
-      <!-- Live Stats Ribbon -->
-      <div class="stats-ribbon">
-        <div class="stat-item">
-          <div class="stat-number">98.4%</div>
-          <div class="stat-label">Match Accuracy</div>
+    <div class="container">
+      <div class="hero-grid">
+        
+        <!-- Left Hero Content -->
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="live-pulse-dot" aria-hidden="true"></span>
+            <span>Next-Gen AI Recruitment & Placement Platform</span>
+          </div>
+          
+          <h1 class="hero-title">
+            Connect Top Talent With <br />
+            <span class="gradient-text">Future-Ready Opportunities</span>
+          </h1>
+          
+          <p class="hero-subtitle">
+            SmartHire seamlessly connects ambitious candidates, premier university talent cells, and enterprise recruiters through automated skill gap analysis, real-time match scoring, and frictionless hiring pipelines.
+          </p>
+          
+          <div class="hero-actions">
+            <a href="/jobs.html" class="btn btn-primary btn-lg" id="hero-find-jobs-btn">
+              Explore Opportunities &rarr;
+            </a>
+            <a href="#employers" class="btn btn-secondary btn-lg" id="hero-employer-btn">
+              🏢 For Employers
+            </a>
+          </div>
+
+          <!-- Micro Trust Proof -->
+          <div class="hero-trust-row">
+            <div class="trust-item">
+              <span class="check">✓</span> <span>Verified Candidate Skills</span>
+            </div>
+            <div class="trust-item">
+              <span class="check">✓</span> <span>Instant AI Fit Scoring</span>
+            </div>
+            <div class="trust-item">
+              <span class="check">✓</span> <span>Direct Recruiter Channels</span>
+            </div>
+          </div>
         </div>
-        <div class="stat-item">
-          <div class="stat-number">12,000+</div>
-          <div class="stat-label">Placed Students</div>
+
+        <!-- Right Hero Visual (Multi-Layer AI Talent Showcase Card) -->
+        <div class="hero-visual-card-wrap">
+          
+          <!-- Orbiting Satellite Pill: Top Right -->
+          <div class="floating-orbit-pill pill-top-right">
+            <span style="color: #10b981; font-size: 1rem;">⚡</span>
+            <span>3.2x Faster Placement</span>
+          </div>
+
+          <!-- Orbiting Satellite Pill: Bottom Left -->
+          <div class="floating-orbit-pill pill-bottom-left">
+            <span style="color: var(--brand-accent); font-size: 1rem;">🏢</span>
+            <span>500+ Hiring Partners</span>
+          </div>
+
+          <!-- Main Interactive AI Showcase Card -->
+          <div class="ai-showcase-card">
+            
+            <div class="showcase-header">
+              <div class="candidate-avatar-row">
+                <div class="candidate-avatar">RS</div>
+                <div class="candidate-info">
+                  <h4>Rahul Sharma</h4>
+                  <p>Full Stack AI Engineer &bull; Final Year</p>
+                </div>
+              </div>
+              <div class="match-score-badge">
+                <div class="score">98.4%</div>
+                <div class="score-label">AI Match Score</div>
+              </div>
+            </div>
+
+            <div class="showcase-match-meter">
+              <div class="meter-labels">
+                <span style="color: var(--text-secondary);">Target Prerequisites</span>
+                <span style="color: #10b981;">Optimal Fit</span>
+              </div>
+              <div class="meter-track">
+                <div class="meter-fill"></div>
+              </div>
+            </div>
+
+            <div class="showcase-skills">
+              <div class="showcase-skills-title">Verified Competencies</div>
+              <div class="showcase-skills-chips">
+                <span class="skill-chip verified">Python ✓</span>
+                <span class="skill-chip verified">React.js ✓</span>
+                <span class="skill-chip verified">FastAPI ✓</span>
+                <span class="skill-chip verified">PyTorch ✓</span>
+                <span class="skill-chip verified">PostgreSQL ✓</span>
+              </div>
+            </div>
+
+            <div class="showcase-footer">
+              <div class="ai-status-indicator">
+                <span class="live-pulse-dot" style="width: 6px; height: 6px;"></span>
+                <span>Active Placement Drive: Tier-1 SDE</span>
+              </div>
+              <span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">
+                Shortlisted
+              </span>
+            </div>
+
+          </div>
         </div>
-        <div class="stat-item">
-          <div class="stat-number">450+</div>
-          <div class="stat-label">Hiring Partners</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">3.2x</div>
-          <div class="stat-label">Faster Selection</div>
-        </div>
+
       </div>
     </div>
   </header>
 
-  <!-- Core Features Grid -->
-  <section class="page-wrapper" style="padding-top: 1rem;">
+  <!-- Live Statistics Banner Section -->
+  <section class="stats-section" id="stats">
     <div class="container">
-      <div style="text-align: center; margin-bottom: 2.5rem;">
-        <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Engineered for High-Velocity Placement</h2>
-        <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Everything students and recruiters need to evaluate fit, schedule interviews, and finalize offers without friction.</p>
-      </div>
+      <div class="stats-grid-modern">
+        
+        <div class="stat-box-modern color-violet">
+          <div class="stat-number-counter" data-counter-target="12000" data-counter-suffix="+">12,000+</div>
+          <div class="stat-label-modern">Placed Candidates</div>
+        </div>
 
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🎯</div>
-          <h3 style="margin-bottom: 0.6rem; font-size: 1.25rem;">Skill-Fit Analytics</h3>
-          <p style="color: var(--text-secondary); font-size: 0.925rem;">
-            Instant percentage fit scoring with exact matching highlights (✓) and skill gap recommendations (✗) tailored to every job prerequisite.
-          </p>
+        <div class="stat-box-modern color-cyan">
+          <div class="stat-number-counter" data-counter-target="500" data-counter-suffix="+">500+</div>
+          <div class="stat-label-modern">Partner Companies</div>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🏢</div>
-          <h3 style="margin-bottom: 0.6rem; font-size: 1.25rem;">Direct Recruiter Channels</h3>
-          <p style="color: var(--text-secondary); font-size: 0.925rem;">
-            Verified corporate talent leads review candidate profiles, inspect PDF resumes securely, and advance applications through 6 hiring stages.
-          </p>
+
+        <div class="stat-box-modern color-emerald">
+          <div class="stat-number-counter" data-counter-target="2500" data-counter-suffix="+">2,500+</div>
+          <div class="stat-label-modern">Active Job Drives</div>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h3 style="margin-bottom: 0.6rem; font-size: 1.25rem;">Zero-Duplicate Apply</h3>
-          <p style="color: var(--text-secondary); font-size: 0.925rem;">
-            One-click application submission with database-enforced integrity, real-time application tracking, and seamless candidate withdrawal.
-          </p>
+
+        <div class="stat-box-modern color-amber">
+          <div class="stat-number-counter" data-counter-target="98.4" data-counter-suffix="%" data-counter-decimals="1">98.4%</div>
+          <div class="stat-label-modern">Placement Match Rate</div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Featured Placement Drives Section -->
-  <section style="padding: 3.5rem 0 4.5rem; background: var(--bg-canvas); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+  <!-- Platform Features Grid Section -->
+  <section class="page-wrapper" id="features" style="padding: 4rem 0;">
     <div class="container">
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.25rem; flex-wrap: wrap; gap: 1rem;">
-        <div>
-          <h2 style="font-size: 1.85rem; margin-bottom: 0.35rem;">Featured Placement Drives</h2>
-          <p style="color: var(--text-secondary);">Browse active hiring openings across top tier technology employers</p>
+      
+      <div class="section-header-wrap">
+        <div class="section-tag-pill">✨ Intelligent Capabilities</div>
+        <h2 class="section-main-title">Engineered for High-Velocity Placement</h2>
+        <p class="section-main-desc">
+          Everything candidates and talent acquisition teams need to evaluate competency, schedule interviews, and finalize offers without friction.
+        </p>
+      </div>
+
+      <div class="features-grid-6">
+        
+        <div class="feature-card-pro theme-violet">
+          <div class="feature-icon-pro ico-violet">🎯</div>
+          <h3>AI Skill-Fit Analytics</h3>
+          <p>
+            Instant percentage fit scoring with exact matching highlights (✓) and actionable skill gap recommendations tailored to each job prerequisite.
+          </p>
         </div>
-        <a href="/jobs.html" class="btn btn-outline btn-sm">View All Opportunities &rarr;</a>
+
+        <div class="feature-card-pro theme-cyan">
+          <div class="feature-icon-pro ico-cyan">🏢</div>
+          <h3>Direct Recruiter Channels</h3>
+          <p>
+            Connect directly with verified corporate talent leads who inspect candidate profiles, portfolios, and PDF resumes through structured 6-stage hiring funnels.
+          </p>
+        </div>
+
+        <div class="feature-card-pro theme-emerald">
+          <div class="feature-icon-pro ico-emerald">⚡</div>
+          <h3>Zero-Duplicate Apply</h3>
+          <p>
+            One-click application submission with database-enforced integrity, real-time status tracking, and seamless applicant withdrawal options.
+          </p>
+        </div>
+
+        <div class="feature-card-pro theme-amber">
+          <div class="feature-icon-pro ico-amber">📄</div>
+          <h3>Intelligent Resume Parsing</h3>
+          <p>
+            Automated PDF resume analysis extracting technical skills, past projects, and academic background to ensure maximum visibility to hiring managers.
+          </p>
+        </div>
+
+        <div class="feature-card-pro theme-pink">
+          <div class="feature-icon-pro ico-pink">📊</div>
+          <h3>Placement Drive Analytics</h3>
+          <p>
+            Comprehensive visual metrics tracking candidate application volume, interview conversion rates, and corporate hiring timelines in real time.
+          </p>
+        </div>
+
+        <div class="feature-card-pro theme-indigo">
+          <div class="feature-icon-pro ico-indigo">🔒</div>
+          <h3>Enterprise Security</h3>
+          <p>
+            Role-based access control protecting student records and employer credentials with cryptographic password hashing and strict JWT sessions.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works (4-Step Connected Workflow) -->
+  <section class="page-wrapper" id="how-it-works" style="padding: 4rem 0; background: var(--bg-canvas); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      
+      <div class="section-header-wrap">
+        <div class="section-tag-pill">🚀 Seamless Workflow</div>
+        <h2 class="section-main-title">How SmartHire Accelerates Your Career</h2>
+        <p class="section-main-desc">
+          A clear, four-step path designed to guide students from account setup to a confirmed corporate offer.
+        </p>
+      </div>
+
+      <div class="workflow-track-grid">
+        
+        <div class="step-card-modern step-1">
+          <div class="step-number-badge">
+            01 <span class="step-pill">Profile</span>
+          </div>
+          <h3>Create Verified Profile</h3>
+          <p>Build your professional student profile, upload your resume, and catalog your verified technical skill stack.</p>
+        </div>
+
+        <div class="step-card-modern step-2">
+          <div class="step-number-badge">
+            02 <span class="step-pill">Match</span>
+          </div>
+          <h3>AI Skill Discovery</h3>
+          <p>Our intelligent matching engine scores opportunities against your profile and pinpoints optimal role alignment.</p>
+        </div>
+
+        <div class="step-card-modern step-3">
+          <div class="step-number-badge">
+            03 <span class="step-pill">Pipeline</span>
+          </div>
+          <h3>One-Click Apply</h3>
+          <p>Submit applications instantly to active campus placement drives and track interview status in real-time.</p>
+        </div>
+
+        <div class="step-card-modern step-4">
+          <div class="step-number-badge">
+            04 <span class="step-pill">Success</span>
+          </div>
+          <h3>Get Hired</h3>
+          <p>Complete technical assessments, connect directly with corporate recruiters, and accept tier-1 offers.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Job Categories Section -->
+  <section class="page-wrapper" id="categories" style="padding: 4.5rem 0;">
+    <div class="container">
+      
+      <div class="section-header-wrap">
+        <div class="section-tag-pill">🔍 High-Demand Roles</div>
+        <h2 class="section-main-title">Explore by Domain & Technology</h2>
+        <p class="section-main-desc">
+          Browse verified corporate openings categorized across high-growth engineering, design, and analytics tracks.
+        </p>
+      </div>
+
+      <div class="category-grid-modern">
+        
+        <a href="/jobs.html" class="category-card-pro cat-frontend">
+          <div class="cat-left-side">
+            <div class="cat-icon-badge bg-blue">💻</div>
+            <div class="cat-details">
+              <h4>Frontend Engineering</h4>
+              <span>320+ Active Drives</span>
+            </div>
+          </div>
+          <div class="cat-arrow-action">&rarr;</div>
+        </a>
+
+        <a href="/jobs.html" class="category-card-pro cat-backend">
+          <div class="cat-left-side">
+            <div class="cat-icon-badge bg-emerald">⚙️</div>
+            <div class="cat-details">
+              <h4>Backend & Cloud</h4>
+              <span>450+ Active Drives</span>
+            </div>
+          </div>
+          <div class="cat-arrow-action">&rarr;</div>
+        </a>
+
+        <a href="/jobs.html" class="category-card-pro cat-fullstack">
+          <div class="cat-left-side">
+            <div class="cat-icon-badge bg-violet">🌐</div>
+            <div class="cat-details">
+              <h4>Full Stack Development</h4>
+              <span>580+ Active Drives</span>
+            </div>
+          </div>
+          <div class="cat-arrow-action">&rarr;</div>
+        </a>
+
+        <a href="/jobs.html" class="category-card-pro cat-aiml">
+          <div class="cat-left-side">
+            <div class="cat-icon-badge bg-pink">🤖</div>
+            <div class="cat-details">
+              <h4>AI & Machine Learning</h4>
+              <span>210+ Active Drives</span>
+            </div>
+          </div>
+          <div class="cat-arrow-action">&rarr;</div>
+        </a>
+
+        <a href="/jobs.html" class="category-card-pro cat-data">
+          <div class="cat-left-side">
+            <div class="cat-icon-badge bg-amber">📊</div>
+            <div class="cat-details">
+              <h4>Data Science & Analytics</h4>
+              <span>190+ Active Drives</span>
+            </div>
+          </div>
+          <div class="cat-arrow-action">&rarr;</div>
+        </a>
+
+        <a href="/jobs.html" class="category-card-pro cat-design">
+          <div class="cat-left-side">
+            <div class="cat-icon-badge bg-rose">🎨</div>
+            <div class="cat-details">
+              <h4>UI/UX & Product Design</h4>
+              <span>140+ Active Drives</span>
+            </div>
+          </div>
+          <div class="cat-arrow-action">&rarr;</div>
+        </a>
+
+        <a href="/jobs.html" class="category-card-pro cat-devops">
+          <div class="cat-left-side">
+            <div class="cat-icon-badge bg-sky">🚀</div>
+            <div class="cat-details">
+              <h4>DevOps & Cloud Infra</h4>
+              <span>160+ Active Drives</span>
+            </div>
+          </div>
+          <div class="cat-arrow-action">&rarr;</div>
+        </a>
+
+        <a href="/jobs.html" class="category-card-pro cat-security">
+          <div class="cat-left-side">
+            <div class="cat-icon-badge bg-ruby">🛡️</div>
+            <div class="cat-details">
+              <h4>Cybersecurity & Systems</h4>
+              <span>110+ Active Drives</span>
+            </div>
+          </div>
+          <div class="cat-arrow-action">&rarr;</div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Placement Drives Section (Live API Connection) -->
+  <section class="page-wrapper" id="jobs" style="padding: 4.5rem 0; background: var(--bg-canvas); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2.75rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <div class="section-tag-pill" style="margin-bottom: 0.6rem;">🔥 Active Openings</div>
+          <h2 class="section-main-title" style="margin-bottom: 0.35rem;">Featured Placement Drives</h2>
+          <p style="color: var(--text-secondary);">Explore the latest verified openings from enterprise hiring partners</p>
+        </div>
+        <a href="/jobs.html" class="btn btn-outline btn-md" id="view-all-jobs-link">View All Opportunities &rarr;</a>
       </div>
 
       <div id="preview-jobs-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
@@ -114,51 +419,349 @@
         <div class="card skeleton skeleton-card"></div>
         <div class="card skeleton skeleton-card"></div>
       </div>
+
     </div>
   </section>
 
-  <!-- Bottom CTA -->
-  <section style="padding: 5rem 0; text-align: center;">
+  <!-- For Employers Enterprise Section -->
+  <section class="container" id="employers">
+    <div class="employer-highlight-section">
+      <div class="employer-grid">
+        
+        <div>
+          <div class="section-tag-pill">🏢 For Corporate Recruiters</div>
+          <h2 style="font-size: 2.4rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2;">
+            Build Your High-Performance Team With Better Talent
+          </h2>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.6;">
+            Eliminate weeks of manual resume screening. SmartHire provides instant skill gap analytics, automated candidate scoring, and verified student credentials for seamless campus hiring.
+          </p>
+
+          <div class="employer-benefits-list">
+            
+            <div class="benefit-item">
+              <div class="benefit-icon-check">✓</div>
+              <div class="benefit-text">
+                <h5>AI Match Shortlisting</h5>
+                <p>Filter candidates instantly by exact skill competencies.</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-icon-check">✓</div>
+              <div class="benefit-text">
+                <h5>Direct Resume Access</h5>
+                <p>Inspect verified academic credentials and resumes in one click.</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-icon-check">✓</div>
+              <div class="benefit-text">
+                <h5>6-Stage Hiring Funnel</h5>
+                <p>Advance applicants from review to offer with real-time status.</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-icon-check">✓</div>
+              <div class="benefit-text">
+                <h5>Placement Analytics</h5>
+                <p>Monitor drive conversion and applicant volume continuously.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="/register.html" class="btn btn-primary btn-lg">Start Hiring Talent &rarr;</a>
+            <a href="/login.html" class="btn btn-secondary btn-lg">Recruiter Sign In</a>
+          </div>
+        </div>
+
+        <!-- Recruiter Preview Metric Card -->
+        <div class="recruiter-preview-card">
+          <div class="recruiter-card-header">
+            <div>
+              <h4 style="font-size: 1.1rem; margin-bottom: 0.15rem;">Live Hiring Pipeline</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Enterprise Tech Drive #2026</p>
+            </div>
+            <span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">Active</span>
+          </div>
+
+          <div class="recruiter-funnel-row">
+            <span>Total Applicants</span>
+            <strong>342 Candidates</strong>
+          </div>
+
+          <div class="recruiter-funnel-row">
+            <span>AI High-Fit (>80%)</span>
+            <strong style="color: #10b981;">94 Qualified</strong>
+          </div>
+
+          <div class="recruiter-funnel-row">
+            <span>Technical Interviews</span>
+            <strong style="color: var(--brand-accent);">28 In Progress</strong>
+          </div>
+
+          <div class="recruiter-funnel-row">
+            <span>Offers Extended</span>
+            <strong style="color: #c084fc;">14 Confirmed</strong>
+          </div>
+
+          <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; font-size: 0.825rem; color: var(--text-muted);">
+            <span>⚡ Avg. Time to Hire</span>
+            <strong style="color: var(--text-primary);">8.5 Days (3.2x faster)</strong>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="page-wrapper" id="testimonials" style="padding: 4rem 0;">
     <div class="container">
-      <div class="card" style="background: var(--grad-surface); border-color: var(--border-glow); padding: 3.5rem 2rem; box-shadow: var(--shadow-glow);">
-        <h2 style="font-size: 2.3rem; margin-bottom: 0.85rem;">Ready to Launch Your Career?</h2>
-        <p style="color: var(--text-secondary); max-width: 580px; margin: 0 auto 2rem; font-size: 1.05rem;">
-          Join the modern placement ecosystem trusted by leading institutions and tier-1 recruiters.
+      
+      <div class="section-header-wrap">
+        <div class="section-tag-pill">💬 Testimonials & Impact</div>
+        <h2 class="section-main-title">Trusted by Students & Enterprise Recruiters</h2>
+        <p class="section-main-desc">
+          Hear how SmartHire transforms campus recruitment for candidates and talent acquisition leads alike.
         </p>
-        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+      </div>
+
+      <div class="testimonials-grid-3">
+        
+        <div class="testimonial-card-pro">
+          <div>
+            <div class="rating-stars">★★★★★</div>
+            <p class="testimonial-quote">
+              "SmartHire's skill-fit scoring showed me exactly which cloud and backend tools I needed to polish. Within 2 weeks of applying, I secured an offer from a tier-1 technology firm!"
+            </p>
+          </div>
+          <div class="testimonial-author-row">
+            <div class="author-avatar-badge">AK</div>
+            <div class="author-details">
+              <h4>Ananya Kapoor</h4>
+              <p>Placed Software Engineer &bull; Tier-1 Tech</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card-pro">
+          <div>
+            <div class="rating-stars">★★★★★</div>
+            <p class="testimonial-quote">
+              "As a campus hiring manager, filtering through hundreds of applications was our biggest bottleneck. SmartHire's AI ranking reduced our screening cycle from 3 weeks to under 4 days."
+            </p>
+          </div>
+          <div class="testimonial-author-row">
+            <div class="author-avatar-badge" style="background: linear-gradient(135deg, #3b82f6, #06b6d4);">VM</div>
+            <div class="author-details">
+              <h4>Vikram Mehta</h4>
+              <p>Head of Campus Talent &bull; Global Tech Corp</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card-pro">
+          <div>
+            <div class="rating-stars">★★★★★</div>
+            <p class="testimonial-quote">
+              "The transparency is remarkable. Real-time application tracking means no student is left wondering about their status. It elevated our university's entire placement season."
+            </p>
+          </div>
+          <div class="testimonial-author-row">
+            <div class="author-avatar-badge" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">SP</div>
+            <div class="author-details">
+              <h4>Prof. Sneha Patel</h4>
+              <p>University Placement Officer &bull; Tech Institute</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Final Call-To-Action Banner -->
+  <section class="final-cta-banner-wrapper" id="cta">
+    <div class="container">
+      <div class="final-cta-box">
+        <h2>Your Next High-Impact Opportunity Starts Here</h2>
+        <p>
+          Join thousands of high-achieving students and leading recruiters on the modern AI platform engineered for career velocity.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 1.15rem; flex-wrap: wrap;">
           <a href="/register.html" class="btn btn-primary btn-lg">Create Student Profile &rarr;</a>
-          <a href="/login.html" class="btn btn-secondary btn-lg">Sign In to Dashboard</a>
+          <a href="/jobs.html" class="btn btn-secondary btn-lg">Explore Active Drives</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer style="border-top: 1px solid var(--border-subtle); padding: 2.5rem 0; background: var(--bg-app); font-size: 0.9rem; color: var(--text-muted);">
-    <div class="container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-      <div style="display: flex; align-items: center; gap: 0.6rem;">
-        <div class="logo-icon" style="width: 26px; height: 26px; font-size: 0.85rem;">⚡</div>
-        <span style="font-family: var(--font-display); font-weight: 700; color: var(--text-primary);">SmartHire Platform</span>
-        <span>&bull; &copy; 2026 Smart Student Placement System</span>
+  <!-- Multi-Column Enterprise Footer -->
+  <footer class="enterprise-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        
+        <!-- Brand Column -->
+        <div class="footer-brand-col">
+          <a href="/index.html" class="brand-logo">
+            <div class="logo-icon">⚡</div>
+            <div>Smart<span class="highlight">Hire</span></div>
+          </a>
+          <p>
+            The modern standard for student campus placements, automated AI skill matching, and enterprise recruitment pipelines.
+          </p>
+          <div class="footer-social-links">
+            <a href="https://github.com" target="_blank" class="social-icon-btn" aria-label="GitHub">🐙</a>
+            <a href="https://linkedin.com" target="_blank" class="social-icon-btn" aria-label="LinkedIn">💼</a>
+            <a href="https://twitter.com" target="_blank" class="social-icon-btn" aria-label="Twitter">🐦</a>
+            <a href="https://discord.com" target="_blank" class="social-icon-btn" aria-label="Discord">💬</a>
+          </div>
+        </div>
+
+        <!-- Platform Links -->
+        <div class="footer-links-col">
+          <h4>Platform</h4>
+          <ul class="footer-links-list">
+            <li><a href="/jobs.html">Explore Opportunities</a></li>
+            <li><a href="#categories">Job Categories</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#employers">For Employers</a></li>
+            <li><a href="/login.html">Candidate Sign In</a></li>
+          </ul>
+        </div>
+
+        <!-- Company & Resources -->
+        <div class="footer-links-col">
+          <h4>Resources</h4>
+          <ul class="footer-links-list">
+            <li><a href="#features">AI Skill Analytics</a></li>
+            <li><a href="/register.html">Student Registration</a></li>
+            <li><a href="/api/docs" target="_blank">Developer API Specs ↗</a></li>
+            <li><a href="#testimonials">Success Stories</a></li>
+            <li><a href="/profile.html">Resume Guidelines</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal & Status -->
+        <div class="footer-links-col">
+          <h4>Trust & Security</h4>
+          <ul class="footer-links-list">
+            <li><a href="javascript:void(0)">Privacy Policy</a></li>
+            <li><a href="javascript:void(0)">Terms of Service</a></li>
+            <li><a href="javascript:void(0)">Security Architecture</a></li>
+            <li><a href="javascript:void(0)">Data Compliance</a></li>
+          </ul>
+        </div>
+
       </div>
-      <div style="display: flex; gap: 1.5rem;">
-        <a href="/jobs.html" style="color: var(--text-muted);">Jobs</a>
-        <a href="/login.html" style="color: var(--text-muted);">Login</a>
-        <a href="/register.html" style="color: var(--text-muted);">Register</a>
-        <a href="/api/docs" target="_blank" style="color: var(--text-muted);">API Specs</a>
+
+      <div class="footer-bottom-bar">
+        <div>
+          &copy; 2026 SmartHire Platform Inc. All rights reserved.
+        </div>
+        <div class="footer-status-pill">
+          <span class="live-pulse-dot" style="width: 6px; height: 6px;"></span>
+          <span>All AI Systems Operational</span>
+        </div>
       </div>
     </div>
   </footer>
 
+  <!-- Scripts -->
   <script src="/js/common.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       const grid = document.getElementById('preview-jobs-grid');
       try {
-        const res = await apiCall('/jobs?limit=3', { requiresAuth: false });
+        const res = await apiCall('/jobs?limit=6', { requiresAuth: false });
         const jobs = res.data || [];
+        
         if (!jobs.length) {
-          grid.innerHTML = renderEmptyState('No Active Placement Drives', 'Check back soon for new corporate hiring openings.');
+          // Render rich curated fallback drives if database is fresh/empty
+          grid.innerHTML = `
+            <div class="card card-interactive" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <div>
+                    <h3 style="font-size: 1.15rem; margin-bottom: 0.2rem;">Full Stack AI Engineer</h3>
+                    <div style="color: var(--brand-accent); font-weight: 600; font-size: 0.9rem;">Nexus Technologies</div>
+                  </div>
+                  <span class="badge" style="background: rgba(139, 92, 246, 0.12); border: 1px solid var(--border-glow); color: var(--brand-accent);">
+                    📍 Bengaluru / Hybrid
+                  </span>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1.1rem; line-height: 1.5;">
+                  Build high-performance web systems and AI microservices using React, Python, and cloud infrastructure.
+                </p>
+                <div style="margin-bottom: 1.25rem;">
+                  <span class="skill-badge matched">Python ✓</span>
+                  <span class="skill-badge matched">React.js ✓</span>
+                  <span class="skill-badge matched">FastAPI ✓</span>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-subtle); padding-top: 0.85rem;">
+                <span style="font-size: 0.8rem; color: var(--text-muted);">🕒 Exp: 0-2 yrs &bull; Full-Time</span>
+                <a href="/jobs.html" class="btn btn-primary btn-sm">View & Apply &rarr;</a>
+              </div>
+            </div>
+
+            <div class="card card-interactive" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <div>
+                    <h3 style="font-size: 1.15rem; margin-bottom: 0.2rem;">Backend Systems Developer</h3>
+                    <div style="color: var(--brand-accent); font-weight: 600; font-size: 0.9rem;">CloudScale Systems</div>
+                  </div>
+                  <span class="badge" style="background: rgba(139, 92, 246, 0.12); border: 1px solid var(--border-glow); color: var(--brand-accent);">
+                    📍 Remote
+                  </span>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1.1rem; line-height: 1.5;">
+                  Design scalable distributed databases and resilient REST/gRPC backend services for global enterprise customers.
+                </p>
+                <div style="margin-bottom: 1.25rem;">
+                  <span class="skill-badge matched">Go ✓</span>
+                  <span class="skill-badge matched">PostgreSQL ✓</span>
+                  <span class="skill-badge matched">Docker ✓</span>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-subtle); padding-top: 0.85rem;">
+                <span style="font-size: 0.8rem; color: var(--text-muted);">🕒 Exp: 0-1 yrs &bull; Full-Time</span>
+                <a href="/jobs.html" class="btn btn-primary btn-sm">View & Apply &rarr;</a>
+              </div>
+            </div>
+
+            <div class="card card-interactive" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <div>
+                    <h3 style="font-size: 1.15rem; margin-bottom: 0.2rem;">Machine Learning Specialist</h3>
+                    <div style="color: var(--brand-accent); font-weight: 600; font-size: 0.9rem;">Cognitive AI Labs</div>
+                  </div>
+                  <span class="badge" style="background: rgba(139, 92, 246, 0.12); border: 1px solid var(--border-glow); color: var(--brand-accent);">
+                    📍 Hyderabad
+                  </span>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1.1rem; line-height: 1.5;">
+                  Train and fine-tune transformer models, implement NLP pipelines, and optimize real-time inference latency.
+                </p>
+                <div style="margin-bottom: 1.25rem;">
+                  <span class="skill-badge matched">PyTorch ✓</span>
+                  <span class="skill-badge matched">NLP ✓</span>
+                  <span class="skill-badge matched">Python ✓</span>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-subtle); padding-top: 0.85rem;">
+                <span style="font-size: 0.8rem; color: var(--text-muted);">🕒 Exp: 0-2 yrs &bull; Internship / FTE</span>
+                <a href="/jobs.html" class="btn btn-primary btn-sm">View & Apply &rarr;</a>
+              </div>
+            </div>
+          `;
           return;
         }
 
@@ -168,27 +771,28 @@
               <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.75rem;">
                 <div>
                   <h3 style="font-size: 1.15rem; margin-bottom: 0.2rem;">${escapeHtml(job.job_title)}</h3>
-                  <div style="color: var(--brand-magenta); font-weight: 600; font-size: 0.9rem;">${escapeHtml(job.company)}</div>
+                  <div style="color: var(--brand-accent); font-weight: 600; font-size: 0.9rem;">${escapeHtml(job.company)}</div>
                 </div>
-                <span class="badge" style="background: rgba(255, 255, 255, 0.06); border: 1px solid var(--border-subtle); color: var(--text-secondary);">
-                  📍 ${escapeHtml(job.location.split(',')[0])}
+                <span class="badge" style="background: rgba(139, 92, 246, 0.12); border: 1px solid var(--border-glow); color: var(--brand-accent);">
+                  📍 ${escapeHtml((job.location || 'Remote').split(',')[0])}
                 </span>
               </div>
               <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1.1rem; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
-                ${escapeHtml(job.description)}
+                ${escapeHtml(job.description || 'Join our engineering team to build next-generation applications.')}
               </p>
               <div style="margin-bottom: 1.25rem;">
                 ${renderSkillBadges(job.skills)}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-subtle); padding-top: 0.85rem;">
-              <span style="font-size: 0.8rem; color: var(--text-muted);">🕒 Exp: ${escapeHtml(job.experience)}</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">🕒 Exp: ${escapeHtml(job.experience || 'Entry-Level')}</span>
               <a href="/jobs.html" class="btn btn-primary btn-sm">View & Apply &rarr;</a>
             </div>
           </div>
         `).join('');
       } catch (err) {
-        grid.innerHTML = renderEmptyState('Unable to Load Drives', 'Please check your connection and refresh.');
+        console.error('Jobs load error:', err);
+        grid.innerHTML = renderEmptyState('Explore Active Opportunities', 'Browse our full catalog of campus drives and corporate listings.', '<a href="/jobs.html" class="btn btn-primary btn-sm">View Jobs &rarr;</a>');
       }
     });
   </script>
